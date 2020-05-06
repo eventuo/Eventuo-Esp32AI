@@ -19,4 +19,10 @@ RUN update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-
 ENV QEMU_REL=esp-develop-20220919
 ENV QEMU_SHA256=f6565d3f0d1e463a63a7f81aec94cce62df662bd42fc7606de4b4418ed55f870
 ENV QEMU_DIST=qemu-${QEMU_REL}.tar.bz2
-ENV QEMU_URL=https://github.com/espressif/qemu/relea
+ENV QEMU_URL=https://github.com/espressif/qemu/releases/download/${QEMU_REL}/${QEMU_DIST}
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+RUN wget --no-verbose ${QEMU_URL} \
+  && echo "${QEM
