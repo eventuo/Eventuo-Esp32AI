@@ -13,4 +13,8 @@ RUN apt-get update \
   linux-tools-virtual \
   && rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/local/bin/u
+RUN update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20
+
+# QEMU
+ENV QEMU_REL=esp-develop-20220919
+ENV QEMU_SHA256=f6565d3f0d1e463a63a7
