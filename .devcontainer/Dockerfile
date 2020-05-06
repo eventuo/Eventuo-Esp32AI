@@ -25,4 +25,8 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 RUN wget --no-verbose ${QEMU_URL} \
-  && echo "${QEM
+  && echo "${QEMU_SHA256} *${QEMU_DIST}" | sha256sum --check --strict - \
+  && tar -xf $QEMU_DIST -C /opt \
+  && rm ${QEMU_DIST}
+
+ENV PATH=/op
