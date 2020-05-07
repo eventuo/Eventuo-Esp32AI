@@ -29,4 +29,8 @@ RUN wget --no-verbose ${QEMU_URL} \
   && tar -xf $QEMU_DIST -C /opt \
   && rm ${QEMU_DIST}
 
-ENV PATH=/op
+ENV PATH=/opt/qemu/bin:${PATH}
+
+RUN echo "source /opt/esp/idf/export.sh > /dev/null 2>&1" >> ~/.bashrc
+
+ENTRYPOINT [ "/opt/esp/entry
