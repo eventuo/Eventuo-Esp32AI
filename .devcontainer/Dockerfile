@@ -33,4 +33,6 @@ ENV PATH=/opt/qemu/bin:${PATH}
 
 RUN echo "source /opt/esp/idf/export.sh > /dev/null 2>&1" >> ~/.bashrc
 
-ENTRYPOINT [ "/opt/esp/entry
+ENTRYPOINT [ "/opt/esp/entrypoint.sh" ]
+
+CMD ["/bin/bash"]
