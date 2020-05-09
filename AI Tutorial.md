@@ -78,3 +78,138 @@ Where:
  - $I_{i}$ is the "value" of the neuron $i$
 
 But... if all weights or inputs in a certain moment are all zero? The sum will be zero. And this 0 will be **propagated** to all other, making always output equal to zero. How to avoid this? It's simple, we can add a **bias** in one, two, or all layers (excluding output layer). A bias is a "standalone" neuron who has no inputs but is fully connected to all other neurons in the layer he lies.
+
+
+![](https://miro.medium.com/max/640/0*WZ3ejB1QgidBrUak.webp)
+*image from https://miro.medium.com*
+
+So, the $O$ value calculation changes to:
+
+$$ O = w_{1} * I_{1} + w_{2} * I_{2} + w_{3} * I_{3} + ... + w_{n} * I_{n} + w_{b} * b $$ 
+
+Where:
+
+ - $i$ is the neuron $i$ of $n$
+ - $w_{i}$ is the weight assigned to the connection $i$
+ - $I_{i}$ is the "value" of the neuron $i$
+ - $b$ is the bias value
+
+Sometimes bias has no weight associated and it is a fixed value marked with just $b$.
+
+### Activation
+
+The output value of the weighted sum could not be good for calculations and neuron values could be very variable. Biologically, if the signal is higher than a mV (millivolts) threshold the neuron is meant to be activated (in informatics we have a binary 1) but if this not happens then neuron is not activated (in informatics we have a binary 0). So we need some way to "flattern" neuron values to what is easy to be recognized as "active" or "inactive", or better, have a good "step". This can be done with simple math functions like **sigmoid** function. Of course, many other can be used also for performances. 
+
+So, neuron "value" calculated with the weighted sum must be the argument of the **activation function**. We can write as:
+
+$$ Oact = f( O ) = f( w_{1} * I_{1} + w_{2} * I_{2} + w_{3} * I_{3} + ... + w_{n} * I_{n} + w_{b} * b ) $$
+
+The type of the $f$ function is not a guess, there are some rules to follow for good NN programming.
+
+In project there are the following activation functions (see [header source](components/briand_ai/include/BriandMath.hxx))
+
+#### Sigmoid (Logistic curve)
+
+$$ Sigmoid(x) = { 1 \over 1 + e^{-x} } $$
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/400px-Logistic-curve.svg.png)
+*image from Wikipedia*
+
+Sigmoid is widely used in neural networks.
+
+#### ReLU
+
+ReLU (**Re**ctified **L**inear **U**nit) is a simple function used (mostly) in hidden layers neuron activation. It is a rectified value:
+
+$$ ReLU(x) = MAX(0, x) $$
+
+So, if $x \gt 0$ then output of $ReLU(x) = x$ otherwise $ReLU(x) = 0$.
+
+#### Other
+
+Other functions that you can often find in NN are: $tanh$ and $softmax$.
+
+#### How to choose activation function
+
+Generally, follow this rule:
+
+ - ReLU should be avoided everywhere but in hidden layers (because it is "restrictive")
+ - In hidden layers never use sigmoid because of the *vanishing gradients* problem
+ 
+So in hidden layers ReLU will be used in project, in the others sigmoid.
+
+### Forward propagation
+
+Now that the data structure is ready, we need to understand how data is propagated from inputs to output (**forward propagation**) with the weighted sum. This is done in project by calculating, starting from the first hidden layer (or the output layer if no hidden layer is defined) the value of each Neuron by calling the ``UpdateValue`` method. 
+This method simply reads the ``Inputs`` vector synapsis. Foreach input, multiplied by the Weight, the sum is saved and then the activation function applied. 
+
+This is done starting from the frist layer from the left till the output layer in the right.
+
+When output is ready the **error** can be calculated respect to the **target** output (expected output). For example if output is 1 but we would expect a value of 2 then the error can be calculated.
+
+To calculate the error there are many formulas can be used, however the most used in NN is the Mean Squared Error (**MSE**). Formula (one output, one target) is:
+
+$$ MSE = {1 \over 2} * ( Target - Output )^2 $$
+
+(the $1 \over 2$ factor simplifies next calculation, just accept it as is by now).
+
+### Deep Neural Networks
+
+It seems a difficult term, but the concept is very very easy: while a Perceptron has no hidden layer, a Neural Network has 1 hidden layer. Where there is more than one hidden layer the network is called *Deep* Neural Network.
+
+---
+**&#x1F44B; Find it in the project!**</span>
+
+Math functions: [BriandMath.hxx](components/briand_ai/include/BriandMath.hxx) and [BriandMath.cpp](components/briand_ai/BriandMath.cpp). Math functions can be used then in all NN sources, by defining pointer type:
+
+```C++
+using ActivationFunction =  double (*)(const double& x); // Pointer to an activation function
+using ErrorFunction =  double (*)(const double& target, const double& output); // Pointer to an error calculation function
+```
+
+NN basic classes in [BriandNN.hxx](components/briand_ai/include/BriandNN.hxx) and [BriandNN.cpp](components/briand_ai/BriandNN.cpp)
+
+```C++
+class Neuron; // This is a neuron. It has its value and all inputs synapsis from other neurons in the network. A method of UpdateValue does the value calculation.
+
+class Synapsis; // This is the neuron "link". It connects the Source neuron to the current neuron with a Weight.
+
+class NeuralLayer; // This is an array of neurons. Each layer has a type (input, output, hidden...) and they share the activation function. UpdateNeurons calls UpdateValue for each network in the layer.
+
+class NeuralNetwork; // This is a basic Neural Netowork structure. Every NN has 1 input layer, 0 or more hidden layers, 1 output layer. The PropagateForward method does the forward propagation
+
+class Perceptron; // A perceptron NN. Has one input and output layer.
+```
+
+---
+
+### Neural network types
+
+Here I paste some very nice images about common neural network types. 
+
+Not all are covered by the project, but some are very interesting and funny. Foreach NN type I will place there some of the common use.
+
+You can find a (mostly) comprehensive chart [here](https://i.stack.imgur.com/0WL34.jpg), follows details for NN used in project *source: [towardsai.net](https://towardsai.net/p/machine-learning/main-types-of-neural-networks-and-its-applications-tutorial-734480d7ec8e)*.
+
+#### Feed Forward (FF):
+
+Applications:
+
+ - Data Compression.
+ - Pattern Recognition.
+ - Computer Vision.
+ - Sonar Target Recognition.
+ - Speech Recognition.
+ - Handwritten Characters Recognition.
+
+![](https://cdn-images-1.medium.com/max/1200/0*fbbKIJ-fxDyCfnd2.png)
+
+#### Deep Feed-forward (DFF):
+
+Applications:
+
+ - Data Compression.
+ - Pattern Recognition.
+ - Computer Vision.
+ - ECG Noise Filtering.
+ - Financial Prediction.
