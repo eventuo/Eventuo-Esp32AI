@@ -360,3 +360,143 @@ In calculus given $$ f(g(x)) $$ where given x we can say $$ x \to y = g(x) \to z
 Doing this with scalar has no "order" problems (commutative).
 
 #### General chain rule multivariate (vectors)
+
+When applied to multivariate functions (vectors as input, not scalar) the order is important. Suppose thinking to $x, y$ as vectors anfd $z$ still as a scalar (because loss/error is always a scalar!), so:
+
+$$x \in \mathbb{R^{n}} = { x_1, x_2, \dots, x_n }$$
+$$y \in \mathbb{R^{m}} = { y_1, y_2, \dots, y_m } $$
+$$z \in \mathbb{R}$$
+
+$$ x \in \mathbb{R^{n}} \to y = g(x) \in \mathbb{R^{m}} \to z = f(y) = f(g(x)) \in \mathbb{R} $$ 
+
+#### General scenario
+
+In a general scenario we would have a NN like this one:
+
+![](tutorial_imgs/FCNNGeneral.png)
+
+Where inputs are denoted as $x_{i}$ ($x$ is vector), $z_{i}$ is the weighted sum (net value), $a_{i}$ is the activated value (out value), and $y_{i}$ is the output value. Then $x, y, z, a$ are all vectors. 
+
+Now with weights:
+
+![](tutorial_imgs/FCNNGeneralW.png)
+
+Weights (of the first layer in the image) can be represented with a matrix with as many rows as the current layer's neurons ($l_{n}$ is "current" layer: first hidden layer in the example) and as many columns as the previous layer's neurons ($l_{n-1}$ is the previous layer, the input layer in the example). This is a 3x2 matrix of weights, denoted as $W$, of the first hidden layer:
+
+$$W_{1} = \begin{vmatrix}
+w_{11} & w_{12} \\
+w_{21} & w_{22} \\
+w_{31} & w_{32} \\
+\end{vmatrix}$$
+
+#### Forward propagation with matrix
+
+I will follow notation and procedure from [this note from Stanford](http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/) because is really well written. Also take a look at [CS229 note from Stanford](https://cs229.stanford.edu/notes-spring2019/backprop.pdf)
+
+Same way, $x$ is the vector of inputs (2x1 matrix) and $b = {b1,b2}$ is the vector of bias weights (bias value is always 1).
+We can write the $z$ vector of net values as the multiplication matrix by vector (that is, weighted sum). Note the dot product $\odot$ is used (*"rows by columns multiply"*) and bias of the current layer (not the previous!) are considered (to simplify, consider $x$ values has been biased before.).
+
+$$
+z^{1} = W_{1} \odot x + b^{1} = \begin{vmatrix}
+w_{11} & w_{12} \\
+w_{21} & w_{22} \\
+w_{31} & w_{32} \\
+\end{vmatrix}
+\odot\begin{vmatrix}
+x_{1} \\
+x_{2} \\
+\end{vmatrix} + 
+\begin{vmatrix}
+b_{1} \\
+b_{2} \\
+b_{3} \\
+\end{vmatrix}
+= \begin{vmatrix}
+(w_{11}x_{1} + w_{12}x_{2}) +b_1 \\
+(w_{21}x_{1} + w_{22}x_{2}) +b_2 \\
+(w_{31}x_{1} + w_{32}x_{2}) +b_3 \\
+\end{vmatrix}
+= \begin{vmatrix}
+z_{1} \\
+z_{2} \\
+z_{3} \\
+\end{vmatrix}
+$$
+
+$$
+a^{1} = f(z^{1}) = f(W_{1} \odot x) = 
+f(\begin{vmatrix}
+z_{1} \\
+z_{2} \\
+z_{3} \\
+\end{vmatrix}) =
+\begin{vmatrix}
+f(z_{1}) \\
+f(z_{2}) \\
+f(z_{3}) \\
+\end{vmatrix} = 
+\begin{vmatrix}
+a_{1} \\
+a_{2} \\
+a_{3} \\
+\end{vmatrix}
+$$
+
+Iterating, forward propagation is done!
+
+---
+**&#x1F44B; Find it in the project!**</span>
+
+Matrix object: [BriandMatrix.hxx](components/briand_ai/include/BriandMatrix.hxx) and [BriandMatrix.cpp](components/briand_ai/BriandMatrix.cpp).
+
+```C++
+Briand::Matrix m;
+```
+By using a custom object for operations (matrix multiplication, hadamard product, dot product...) if a better algorithm is found it is easier to apply to all project!
+
+FCNN code is under the ``Briand`` namespace, separated from the Perceptron code (under the ``Briand::SimpleNN``) in order to use same object names but with a different implementation (matrix).
+
+```C++
+class NeuralLayer; // This is a layer. It consists of vector of values, activation function and (for output layer only) error calculation function. The internal matrix has the weights from the previous connected layer.
+
+class FCNN; // This is a fully connected neural network. By using utility methods layers can be added dynamically. 
+```
+
+Neural network (fully connected) sources are [BriandFCNN.hxx](components/briand_ai/include/BriandFCNN.hxx) and [BriandFCNN.cpp](components/briand_ai/BriandFCNN.cpp)
+
+FCNN Example:
+
+```C++
+// New instance, empty NN
+auto fcnn = make_unique<Briand::FCNN>();        
+
+// Add the input layer with 2 inputs and specify input values. A bias neuron is added automatically
+fcnn->AddInputLayer(2, {1, 1});
+
+// Add one hidden layer of 2 neurons and specify activation function and weights matrix. A bias neuron is added automatically
+fcnn->AddHiddenLayer(2, Briand::Math::Identity, Briand::Math::DeIdentity, { {0.5, 0.5}, { 0.5, 0.5 } });
+
+// Add one hidden layer of 2 neurons and specify activation function; weights will be 1.0. A bias neuron is added automatically
+fcnn->AddHiddenLayer(2, Briand::Math::Identity, Briand::Math::DeIdentity);
+
+// Add the output layer (2 values), specify activation and error calculation function; specify last weight matrix.
+fcnn->AddOutputLayer(2, Briand::Math::Identity, Briand::Math::DeIdentity, Briand::Math::MSE, { {0.1, 0.2}, { 0.1, 0.1 } });
+
+// Propagate; the result is available calling GetResult().
+fcnn->Propagate();
+
+// Print out result vector (output values)
+fcnn->PrintResult();
+
+// Destroy object
+fcnn.reset();
+```
+
+Forward propagation using vector and matrix can be found in code looking at the  
+``FCNN::Propagate`` method.
+
+In the next section (backpropagation with matrix) you can find the procedure adopted in the code inside the ``FCNN::Train`` method.
+
+#### Backpropagation with matrix
+
+*I will continue to follow Stanford's notes.*
