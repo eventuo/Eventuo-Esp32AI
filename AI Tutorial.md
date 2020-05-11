@@ -500,3 +500,103 @@ In the next section (backpropagation with matrix) you can find the procedure ado
 #### Backpropagation with matrix
 
 *I will continue to follow Stanford's notes.*
+
+With matrix notation, understanding backpropagation and math behind is easier. However the math behind does not change (derivatives are the core of the algorithm). Why matrixes? Easy: computers (CPUs and better GPUs) are famuos to be very efficient in matrix calculations!
+
+*Referring to ``FCNN::Train`` method.*
+
+Starting from the output layer, the output vector $y$ is compared with the target values vector $\overline y$ and the error vector (or 1x matrix) $J$ (often can be found as $E$) is calculated using the formula of MSE. Total error is calculated as the sum of all errors.
+
+$$
+J = 
+\begin{vmatrix}
+0.5*(\overline y_{1} - y_{1})^{2} \\
+0.5*(\overline y_{2} - y_{2})^{2} \\
+\end{vmatrix}
+$$
+
+Then, we have to minimize the function of $J(W,b)$ where $W$ is the weight matrix and $b$ the bias. The new weight of $w_{ij}$ (matrix element) at layer $l$ is given by the known formula:
+
+$$\overline w_{ij} = w_{ij} -\eta\frac{ \partial J }{ \partial w_{ij}}$$ 
+
+In order to do that, follow single steps from layer $L$ (output layer) downto layer 1 (input layer) foreach layer $l$. At each layer, save a "running" gradient to be used in the next operation. Just remember the notation:
+
+ - Layers are numbered from $1 \dots l \dots L$ wher 1 is input layer and $L$ the output layer. 
+ - $z^{l}_{i}$ is the net value, weighted sum, at layer $l$ (of neuron $i$)  
+ - $f$ is the activation function, $f^{'}$ its derivative (*Important! each layer has its own!*)
+ - $J$ is the error function, $J^{'}$ its derivative  
+ - $a^{l}_{i} = f(z^{l}_{i})$ is the out value, activated weighted sum, at layer $l$ (of neuron $i$)
+ - $b^{l}_{i}$ is the bias weight at layer $l$ (note $i$ because at layer $l$ we have $i$ neurons connected to $j$ neurons of the previous layer $l-1$)
+ - $w^{l}_{ij}$ is the weight connecting the $j$-th neuron of layer $l-1$ to the $i$-th neuron at layer $l$.
+ - $\overline y$ is the target value, $y$ is the output value but only at the output layer ($y = a_{i}^{L}$). 
+ - $x_{j}$ is the input value, layer 1 value ($x_j =  a^{1}_{j}$).
+ - Without $_{ij}$ or $_{i}$ notation a matrix or vector is meant. So $z^{l}$ is the net values vector at layer $l$,  $a^{l}$ the out values vector, $W^{l}$ the weight matrix from layer $l-1$ to layer $l$. In this matrix we have as many rows as neurons in layer $l$ and as many columns as layer $l-1$ neurons.
+ - The operator $\odot$ is the matrix dot-product (rows by columns), the operator $\bullet$ is matrix Hadamard product (element by element)
+
+**Algorithm**
+
+The core of the algorithm is calculating the "running" value $\delta^{l}$ that is the amount of error on the output for which the neuron $i$ at layer $l$ is responsible of. Can be found as vector called $\delta^{l}$ for the entire layer $l$. So:
+
+**1)** At output layer $L$ we have $\overline y$ and $y$ as target and output. Calculate for each output unit $i$:
+
+$$ \delta^{L} = \frac{ \partial J }{ \partial z^{L}} = 
+\frac{\partial( 0.5 (\overline y - y)^{2} )}{ \partial y} \bullet 
+\frac{\partial y}{\partial z^{L}} =
+(y - \overline y) \bullet f^{'}(z^{L}) 
+$$
+
+*Important! Activation function $f$ is always to be assumed as the activation function at the current layer $l$ and the same for its derivative $f^{'}$*
+
+**2)** Running backward, foreach layer $l$ calculate $\delta^{l}$ as:
+
+$$
+\delta^{l} = ( (W^{l})^{T} \odot \delta^{l+1} ) \bullet f^{'}(z^{l})
+$$
+
+Using $\delta$ the new weights and bias can be computed as:
+
+$$  
+\overline W^{l} = W^{l} - \eta (\delta^{l+1} \odot (a^{l})^T) \\
+\overline b^{l} = b^{l} - \eta (\delta^{l+1})
+$$
+
+
+---
+**&#x1F44B; Find it in the project!**</span>
+
+Neural network (fully connected) sources are [BriandFCNN.hxx](components/briand_ai/include/BriandFCNN.hxx) and [BriandFCNN.cpp](components/briand_ai/BriandFCNN.cpp)
+
+```C++
+fcnn = make_unique<Briand::FCNN>();
+fcnn->AddInputLayer(2); // no weights = random values
+fcnn->AddHiddenLayer(2, Briand::Math::Sigmoid, Briand::Math::DeSigmoid);
+fcnn->AddOutputLayer(1, Briand::Math::Sigmoid, Briand::Math::DeSigmoid, Briand::Math::MSE, Briand::Math::DeMSE);
+fcnn->Train({1, 0}, {1}, 0.1);
+```
+---
+
+#### Resources and further reading
+
+I think the best article to be read is [this](http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/) and its [side note](https://cs229.stanford.edu/notes-spring2019/backprop.pdf) from Stanford university. It contains both the scalar and vector version of backpropagation and gradient descent algorithm.
+
+You can find an example (very well written) [here](https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/) about gradient descent algorithm applied to backpropagation step-by-step with all maths.
+
+Also [here](https://medium.com/@14prakash/back-propagation-is-very-simple-who-made-it-complicated-97b794c97e5c) there is a good tutorial with matrix-style calculations.
+
+### Most used functions and their derivatives
+
+### My name is $\eta$: *learning rate*, for friends.
+
+## What is a Convolutional Neural Network (CNN)
+
+### Kernels
+
+### Pooling
+
+### FCN (Fully Connected Network)
+
+### Image formats
+
+## Conclusions
+
+future technology, creative, human being, "answers", state of art, train data quality is everything!
