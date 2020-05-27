@@ -23,4 +23,6 @@ using namespace Briand;
     Neural Layer class
 ***********************************************************************/
 
-NeuralLayer::NeuralLayer(const La
+NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de) {
+    // Check
+    if (
