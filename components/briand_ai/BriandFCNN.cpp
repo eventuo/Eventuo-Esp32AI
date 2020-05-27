@@ -14,3 +14,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "BriandFCNN.hxx"
+
+using namespace std;
+using namespace Briand;
+
+/***************************************************
