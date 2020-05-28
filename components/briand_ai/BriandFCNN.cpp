@@ -26,4 +26,5 @@ using namespace Briand;
 NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de) {
     // Check
     if (neurons == 0) throw out_of_range("Neurons must be > 0 for any layer");
-    if (type == LayerType::Input && (f != nullptr || df != n
+    if (type == LayerType::Input && (f != nullptr || df != nullptr || e != nullptr)) throw runtime_error("Cannot specify f, df or e for input layer!");
+    if (type != LayerType::Input && (f == 
