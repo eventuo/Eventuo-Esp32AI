@@ -28,4 +28,5 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     if (neurons == 0) throw out_of_range("Neurons must be > 0 for any layer");
     if (type == LayerType::Input && (f != nullptr || df != nullptr || e != nullptr)) throw runtime_error("Cannot specify f, df or e for input layer!");
     if (type != LayerType::Input && (f == nullptr || df == nullptr)) throw runtime_error("Must specify f and df for non-input layers!");
-    if (type == LayerType::Outp
+    if (type == LayerType::Output && e == nullptr) throw runtime_error("Must specify cost/error calculation for output layer!");
+    if (type != LayerType::Outpu
