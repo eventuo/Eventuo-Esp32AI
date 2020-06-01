@@ -33,4 +33,11 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
 
     // Initialize
     this->_f = f;
-    this
+    this->_df = df;
+    this->_E = e;
+    this->_dE = de;
+    this->_type = type;
+    this->_weights = nullptr;
+    this->_delta = nullptr;
+
+    // Bia
