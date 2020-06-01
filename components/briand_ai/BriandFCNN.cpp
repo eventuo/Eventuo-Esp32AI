@@ -40,4 +40,6 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     this->_weights = nullptr;
     this->_delta = nullptr;
 
-    // Bia
+    // Bias neuron value is always 1 so just handle the weights (FCN)
+    this->_bias_weights = nullptr;
+    if (this->_type == LayerType::Input || this->_t
