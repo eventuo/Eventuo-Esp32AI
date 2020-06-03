@@ -42,4 +42,6 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
 
     // Bias neuron value is always 1 so just handle the weights (FCN)
     this->_bias_weights = nullptr;
-    if (this->_type == LayerType::Input || this->_t
+    if (this->_type == LayerType::Input || this->_type == LayerType::Hidden) {
+        // Initialize all weights to 1
+        this->_bias_weights = make_unique<vector<double>>(neurons
