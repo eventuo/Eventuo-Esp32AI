@@ -44,4 +44,10 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     this->_bias_weights = nullptr;
     if (this->_type == LayerType::Input || this->_type == LayerType::Hidden) {
         // Initialize all weights to 1
-        this->_bias_weights = make_unique<vector<double>>(neurons
+        this->_bias_weights = make_unique<vector<double>>(neurons, 1.0);
+    }
+
+    this->_neuronsNet = make_unique<vector<double>>();
+    this->_neuronsNet->reserve(neurons);
+
+    
