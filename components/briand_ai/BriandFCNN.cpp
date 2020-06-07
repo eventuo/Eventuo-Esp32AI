@@ -50,4 +50,8 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     this->_neuronsNet = make_unique<vector<double>>();
     this->_neuronsNet->reserve(neurons);
 
-    
+    this->_neuronsOut = make_unique<vector<double>>();
+    this->_neuronsOut->reserve(neurons);
+
+    // Initialize neurons to 0
+    fo
