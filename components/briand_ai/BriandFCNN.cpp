@@ -54,4 +54,10 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     this->_neuronsOut->reserve(neurons);
 
     // Initialize neurons to 0
-    fo
+    for (size_t i=0; i<neurons; i++) {
+        this->_neuronsNet->push_back(0.0);
+        this->_neuronsOut->push_back(0.0);
+    }
+}
+
+Neura
