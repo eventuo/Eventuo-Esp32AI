@@ -60,4 +60,4 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     }
 }
 
-Neura
+NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, Err
