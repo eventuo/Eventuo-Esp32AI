@@ -60,4 +60,7 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     }
 }
 
-NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, Err
+NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const Matrix& weights) 
+    : NeuralLayer(type, neurons, f, df, e, de)
+{
+    // Weights allowed for non-input 
