@@ -63,4 +63,7 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
 NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const Matrix& weights) 
     : NeuralLayer(type, neurons, f, df, e, de)
 {
-    // Weights allowed for non-input 
+    // Weights allowed for non-input layers 
+    if (this->_type == LayerType::Input) throw runtime_error("Weights not allowed for input layer.");
+
+    // Weight matrix 
