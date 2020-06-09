@@ -66,4 +66,5 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     // Weights allowed for non-input layers 
     if (this->_type == LayerType::Input) throw runtime_error("Weights not allowed for input layer.");
 
-    // Weight matrix 
+    // Weight matrix rows must be equal to layer's neurons (not including bias)
+    if (weights.Rows() != neurons) throw runtime_error("Weigh
