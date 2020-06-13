@@ -81,4 +81,9 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
 
 NeuralLayer::~NeuralLayer() {
     this->_weights.reset();
-    this->_neuro
+    this->_neuronsNet.reset();
+    this->_neuronsOut.reset();
+    this->_delta.reset();
+}
+
+void NeuralLayer::SetBiasWeights(const vector<doub
