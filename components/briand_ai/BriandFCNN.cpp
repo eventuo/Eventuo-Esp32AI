@@ -69,4 +69,9 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     // Weight matrix rows must be equal to layer's neurons (not including bias)
     if (weights.Rows() != neurons) throw runtime_error("Weight matrix invalid: must have as many rows as layer's neurons!");
 
-    // Weight matrix cols must be equal to layer's input (cannot chec
+    // Weight matrix cols must be equal to layer's input (cannot check there)
+
+    this->_weights = make_unique<Matrix>(weights);
+}
+
+NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Acti
