@@ -74,4 +74,11 @@ NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, Activatio
     this->_weights = make_unique<Matrix>(weights);
 }
 
-NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const std::initializer_list<std::initializer_list<double>>&
+NeuralLayer::NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const std::initializer_list<std::initializer_list<double>>& weights)
+    : NeuralLayer(type, neurons, f, df, e, de, Matrix{weights})
+{
+}
+
+NeuralLayer::~NeuralLayer() {
+    this->_weights.reset();
+    this->_neuro
