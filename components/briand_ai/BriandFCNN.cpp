@@ -86,4 +86,6 @@ NeuralLayer::~NeuralLayer() {
     this->_delta.reset();
 }
 
-void NeuralLayer::SetBiasWeights(const vector<doub
+void NeuralLayer::SetBiasWeights(const vector<double>& bias_weights) { 
+    // Allowed only for input or hidden layer
+    if (this->_type != LayerType::Hidden && this->_type != LayerType::Input) throw runt
