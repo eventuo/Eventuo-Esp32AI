@@ -88,4 +88,6 @@ NeuralLayer::~NeuralLayer() {
 
 void NeuralLayer::SetBiasWeights(const vector<double>& bias_weights) { 
     // Allowed only for input or hidden layer
-    if (this->_type != LayerType::Hidden && this->_type != LayerType::Input) throw runt
+    if (this->_type != LayerType::Hidden && this->_type != LayerType::Input) throw runtime_error("Bias allowed only for input or hidden layer.");
+
+    this->_bias_weights = make_unique<vector<double>>(bias_weights)
