@@ -95,4 +95,8 @@ void NeuralLayer::SetBiasWeights(const vector<double>& bias_weights) {
 
 /**********************************************************************
     FCNN class
-***********************
+***********************************************************************/
+
+FCNN::FCNN() {
+    this->_hasOutputs = false;
+    this->_layers = make_unique<vector<uni
