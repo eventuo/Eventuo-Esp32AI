@@ -107,4 +107,7 @@ FCNN::~FCNN() {
 }
 
 void FCNN::AddInputLayer(const size_t& inputs) {
-   
+    // Check
+    if (this->_layers->size() > 0) throw runtime_error("Input layer has been added before.");
+
+    auto layer = make_unique<N
