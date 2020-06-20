@@ -114,4 +114,6 @@ void FCNN::AddInputLayer(const size_t& inputs) {
     this->_layers->push_back(std::move(layer));
 }
 
-vo
+void FCNN::AddInputLayer(const size_t& inputs, const vector<double>& values) {
+    // Check
+    if (values.size() != inputs)
