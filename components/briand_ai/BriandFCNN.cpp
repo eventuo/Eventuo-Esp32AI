@@ -110,4 +110,8 @@ void FCNN::AddInputLayer(const size_t& inputs) {
     // Check
     if (this->_layers->size() > 0) throw runtime_error("Input layer has been added before.");
 
-    auto layer = make_unique<N
+    auto layer = make_unique<NeuralLayer>(LayerType::Input, inputs, nullptr, nullptr, nullptr, nullptr);
+    this->_layers->push_back(std::move(layer));
+}
+
+vo
