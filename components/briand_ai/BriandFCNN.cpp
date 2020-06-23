@@ -116,4 +116,9 @@ void FCNN::AddInputLayer(const size_t& inputs) {
 
 void FCNN::AddInputLayer(const size_t& inputs, const vector<double>& values) {
     // Check
-    if (values.size() != inputs)
+    if (values.size() != inputs) throw runtime_error("Input values: invalid size.");
+
+    this->AddInputLayer(inputs);
+
+    // Initialize values
+    for (int i = 0
