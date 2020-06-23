@@ -121,4 +121,8 @@ void FCNN::AddInputLayer(const size_t& inputs, const vector<double>& values) {
     this->AddInputLayer(inputs);
 
     // Initialize values
-    for (int i = 0
+    for (int i = 0; i<inputs; i++) this->_layers->at(0)->_neuronsOut->at(i) = values[i];
+}
+
+void FCNN::SetInput(const vector<double>& values) {
+    // Che
