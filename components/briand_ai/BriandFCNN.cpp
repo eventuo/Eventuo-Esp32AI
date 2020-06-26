@@ -125,4 +125,5 @@ void FCNN::AddInputLayer(const size_t& inputs, const vector<double>& values) {
 }
 
 void FCNN::SetInput(const vector<double>& values) {
-    // Che
+    // Check
+    if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot set input values: miss
