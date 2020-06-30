@@ -129,4 +129,7 @@ void FCNN::SetInput(const vector<double>& values) {
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot set input values: missing input layer.");
     if (values.size() != this->_layers->at(0)->_neuronsOut->size()) throw runtime_error("Input values: invalid size.");
 
-    for (int i = 0; i<this->_layers->at(0)->_neuronsOut->size(); i++) this->_layers->at(0)->_neuronsOut->at(i) 
+    for (int i = 0; i<this->_layers->at(0)->_neuronsOut->size(); i++) this->_layers->at(0)->_neuronsOut->at(i) = values[i];
+}
+
+void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFunc, const ActivationFunctio
