@@ -137,4 +137,5 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add hidden layer: missing an input layer.");
     if (this->_hasOutputs) throw runtime_error("Cannot add hidden layer after output layer!");
 
-    // Defaul
+    // Default weights matrix with random values, as many rows as neurons, as many columns as previous layer neurons.
+    const int rows
