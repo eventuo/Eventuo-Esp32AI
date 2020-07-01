@@ -134,4 +134,7 @@ void FCNN::SetInput(const vector<double>& values) {
 
 void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFunc, const ActivationFunction& activationDer) {
     // Check
-    if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add hidden laye
+    if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add hidden layer: missing an input layer.");
+    if (this->_hasOutputs) throw runtime_error("Cannot add hidden layer after output layer!");
+
+    // Defaul
