@@ -138,4 +138,10 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     if (this->_hasOutputs) throw runtime_error("Cannot add hidden layer after output layer!");
 
     // Default weights matrix with random values, as many rows as neurons, as many columns as previous layer neurons.
-    const int rows
+    const int rows = neurons;
+    const int cols = this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size();
+
+    Matrix init{rows, cols};
+    init.Randomize();
+
+ 
