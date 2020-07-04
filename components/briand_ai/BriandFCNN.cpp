@@ -144,4 +144,5 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     Matrix init{rows, cols};
     init.Randomize();
 
- 
+    auto layer = make_unique<NeuralLayer>(LayerType::Hidden, neurons, activationFunc, activationDer, nullptr, nullptr, init);
+   
