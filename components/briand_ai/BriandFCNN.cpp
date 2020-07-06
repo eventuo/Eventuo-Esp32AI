@@ -148,4 +148,6 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     this->_layers->push_back(std::move(layer));
 }
 
-void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFun
+void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const Matrix& weights) {
+    // Check
+    if (this->_layers == nullptr || this->_laye
