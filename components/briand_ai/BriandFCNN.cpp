@@ -154,4 +154,6 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     if (this->_hasOutputs) throw runtime_error("Cannot add hidden layer after output layer!");
 
     // Check: matrix must have as many rows as the current layer neurons
-    if (neurons !=
+    if (neurons != weights.Rows()) throw out_of_range("Invalid weights: weight matrix rows must be equal to the number of this layer neurons.");
+
+    // Check:
