@@ -163,4 +163,6 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     this->_layers->push_back(std::move(layer));
 }
 
-void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const Err
+void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const ErrorFunction& errorFunc, const ErrorFunction& errorFuncDer) {
+    // Check
+    if (this->_hasOutputs) throw runtime_error("Output layer has been ad
