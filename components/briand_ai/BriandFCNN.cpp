@@ -162,3 +162,5 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
     auto layer = make_unique<NeuralLayer>(LayerType::Hidden, neurons, activationFunc, activationDer, nullptr, nullptr, weights);
     this->_layers->push_back(std::move(layer));
 }
+
+void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const Err
