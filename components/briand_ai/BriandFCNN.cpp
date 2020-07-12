@@ -165,4 +165,5 @@ void FCNN::AddHiddenLayer(const size_t& neurons, const ActivationFunction& activ
 
 void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const ErrorFunction& errorFunc, const ErrorFunction& errorFuncDer) {
     // Check
-    if (this->_hasOutputs) throw runtime_error("Output layer has been ad
+    if (this->_hasOutputs) throw runtime_error("Output layer has been added before.");
+    if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add output
