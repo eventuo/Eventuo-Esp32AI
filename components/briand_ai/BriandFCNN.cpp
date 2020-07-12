@@ -168,4 +168,6 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     if (this->_hasOutputs) throw runtime_error("Output layer has been added before.");
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add output layer: missing an input layer.");
 
-    // Default weights matrix with random values, as many rows as neurons, as many columns as 
+    // Default weights matrix with random values, as many rows as neurons, as many columns as previous layer neurons.
+    const int rows = outputs;
+    const int cols = this->_layers->at(this->_layers->size() - 1)->_neur
