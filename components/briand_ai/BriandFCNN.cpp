@@ -175,4 +175,8 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     Matrix init{rows, cols};
     init.Randomize();
 
-    auto layer = make_unique<NeuralLayer>(LayerType::Output, outputs, activation
+    auto layer = make_unique<NeuralLayer>(LayerType::Output, outputs, activationFunc, activationDer, errorFunc, errorFuncDer, init);
+    this->_layers->push_back(std::move(layer));
+
+    // Close network build
+  
