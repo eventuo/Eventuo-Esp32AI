@@ -170,4 +170,9 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
 
     // Default weights matrix with random values, as many rows as neurons, as many columns as previous layer neurons.
     const int rows = outputs;
-    const int cols = this->_layers->at(this->_layers->size() - 1)->_neur
+    const int cols = this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size();
+
+    Matrix init{rows, cols};
+    init.Randomize();
+
+    auto layer = make_unique<NeuralLayer>(LayerType::Output, outputs, activation
