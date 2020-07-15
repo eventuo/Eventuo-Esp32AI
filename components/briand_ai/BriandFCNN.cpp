@@ -179,4 +179,7 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     this->_layers->push_back(std::move(layer));
 
     // Close network build
-  
+    this->_hasOutputs = true;
+}
+
+void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFuncti
