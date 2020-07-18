@@ -182,4 +182,6 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     this->_hasOutputs = true;
 }
 
-void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFuncti
+void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const ErrorFunction& errorFunc, const ErrorFunction& errorFuncDer, const Matrix& weights) {
+    // Check
+    if (this-
