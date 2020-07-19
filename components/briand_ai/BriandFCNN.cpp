@@ -188,4 +188,7 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot add output layer: missing an input layer.");
 
     // Check: matrix must have as many rows as the current layer neurons
-    if (outputs != weights.Rows()) throw out_of_range("Invalid weights: weight matrix rows must be equal t
+    if (outputs != weights.Rows()) throw out_of_range("Invalid weights: weight matrix rows must be equal to the number of this layer neurons.");
+
+    // Check: matrix must have as many columns as the PREVIOUS layer neurons
+    i
