@@ -191,4 +191,4 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     if (outputs != weights.Rows()) throw out_of_range("Invalid weights: weight matrix rows must be equal to the number of this layer neurons.");
 
     // Check: matrix must have as many columns as the PREVIOUS layer neurons
-    i
+    if (this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size() != weights.Cols()) throw out_of_range("Invalid weights: weight matrix cols mu
