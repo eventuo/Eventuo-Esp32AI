@@ -194,4 +194,7 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
     if (this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size() != weights.Cols()) throw out_of_range("Invalid weights: weight matrix cols must be equal to the number of previous layer neurons.");
 
 
-    auto layer = make_unique<NeuralLayer>(LayerType::Outp
+    auto layer = make_unique<NeuralLayer>(LayerType::Output, outputs, activationFunc, activationDer, errorFunc, errorFuncDer, weights);
+    this->_layers->push_back(std::move(layer));
+
+    // Close network build
