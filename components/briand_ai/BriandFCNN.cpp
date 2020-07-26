@@ -204,4 +204,5 @@ void FCNN::AddOutputLayer(const size_t& outputs, const ActivationFunction& activ
 void FCNN::Propagate() {
     // Check
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot propagate: missing an input layer.");
-    if (!this->_hasOutputs) throw runtime_error("Cannot propagate: m
+    if (!this->_hasOutputs) throw runtime_error("Cannot propagate: missing an output layer.");
+    if (this->_layers == nullptr || this->_layers->size() < 2) throw runtime_error("C
