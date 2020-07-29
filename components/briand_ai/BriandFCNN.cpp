@@ -205,4 +205,7 @@ void FCNN::Propagate() {
     // Check
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot propagate: missing an input layer.");
     if (!this->_hasOutputs) throw runtime_error("Cannot propagate: missing an output layer.");
-    if (this->_layers == nullptr || this->_layers->size() < 2) throw runtime_error("C
+    if (this->_layers == nullptr || this->_layers->size() < 2) throw runtime_error("Cannot propagate with less than 2 layers!");
+
+    // Weighted sum calculation, starting from the first layer after input.
+    for (au
