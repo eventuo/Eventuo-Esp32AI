@@ -210,4 +210,8 @@ void FCNN::Propagate() {
     // Weighted sum calculation, starting from the first layer after input.
     for (auto it = this->_layers->begin() + 1; it != this->_layers->end(); it++) {
         // Previous layer l-1
-        const auto& l_1 = (it -
+        const auto& l_1 = (it - 1)->get();
+        // Current layer a_(l)
+        const auto& l = it->get();
+
+        // If the previous layer is the input layer,
