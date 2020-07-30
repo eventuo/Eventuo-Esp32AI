@@ -208,4 +208,6 @@ void FCNN::Propagate() {
     if (this->_layers == nullptr || this->_layers->size() < 2) throw runtime_error("Cannot propagate with less than 2 layers!");
 
     // Weighted sum calculation, starting from the first layer after input.
-    for (au
+    for (auto it = this->_layers->begin() + 1; it != this->_layers->end(); it++) {
+        // Previous layer l-1
+        const auto& l_1 = (it -
