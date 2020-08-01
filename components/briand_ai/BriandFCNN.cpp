@@ -214,4 +214,8 @@ void FCNN::Propagate() {
         // Current layer a_(l)
         const auto& l = it->get();
 
-        // If the previous layer is the input layer,
+        // If the previous layer is the input layer, separate calculus to add bias
+        // (backpropagating would drive to wrong input value if iterated)
+
+        if (l_1->_type == LayerType::Input && l_1->_bias_weights != nullptr && l_1->_bias_weights->size() > 0) {
+            // copy values
