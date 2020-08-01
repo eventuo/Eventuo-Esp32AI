@@ -219,3 +219,6 @@ void FCNN::Propagate() {
 
         if (l_1->_type == LayerType::Input && l_1->_bias_weights != nullptr && l_1->_bias_weights->size() > 0) {
             // copy values
+            vector<double> a_l_1;
+            a_l_1.assign(l_1->_neuronsOut->begin(), l_1->_neuronsOut->end()); 
+            
