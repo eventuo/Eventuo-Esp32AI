@@ -224,4 +224,6 @@ void FCNN::Propagate() {
             // add biasing
             for (size_t i = 0; i<a_l_1.size(); i++) a_l_1[i] += l_1->_bias_weights->at(i);
 
-            // Weighted sum 
+            // Weighted sum can be performed with weight_matrix * vector
+            // In math: z_(l) = W_(l) * a_(l-1)
+            l->_neuronsNet = l->_weights->MultiplyVector(
