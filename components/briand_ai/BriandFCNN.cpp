@@ -221,4 +221,7 @@ void FCNN::Propagate() {
             // copy values
             vector<double> a_l_1;
             a_l_1.assign(l_1->_neuronsOut->begin(), l_1->_neuronsOut->end()); 
-            
+            // add biasing
+            for (size_t i = 0; i<a_l_1.size(); i++) a_l_1[i] += l_1->_bias_weights->at(i);
+
+            // Weighted sum 
