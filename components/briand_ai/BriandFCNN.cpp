@@ -226,4 +226,9 @@ void FCNN::Propagate() {
 
             // Weighted sum can be performed with weight_matrix * vector
             // In math: z_(l) = W_(l) * a_(l-1)
-            l->_neuronsNet = l->_weights->MultiplyVector(
+            l->_neuronsNet = l->_weights->MultiplyVector(a_l_1);
+        }
+        else {
+            // Direct, save memory
+            
+            // Weighted sum can be performed 
