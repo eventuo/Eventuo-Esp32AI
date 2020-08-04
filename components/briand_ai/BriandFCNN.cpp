@@ -233,4 +233,7 @@ void FCNN::Propagate() {
             
             // Weighted sum can be performed with weight_matrix * vector
             // In math: z_(l) = W_(l) * a_(l-1)
-            l->_neuronsNet = l->_weights->Mul
+            l->_neuronsNet = l->_weights->MultiplyVector(*l_1->_neuronsOut.get());
+        }    
+
+        // Now activate neurons applying the activation function of
