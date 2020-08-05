@@ -245,4 +245,9 @@ void FCNN::Propagate() {
             // Activate
             l->_neuronsOut->at(i) = l->_f( l->_neuronsNet->at(i) );
         }
-  
+    }
+}
+
+unique_ptr<vector<double>> FCNN::GetResult() {
+    // Check
+    if (!this->_hasOutputs) throw runtime_error("GetResult() Error: mis
