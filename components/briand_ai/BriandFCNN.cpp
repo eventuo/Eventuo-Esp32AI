@@ -239,4 +239,5 @@ void FCNN::Propagate() {
         // Now activate neurons applying the activation function of this layer
         // In math a_l = f(z_l)
         for (int i = 0; i< l->_neuronsNet->size(); i++) {
-            // If current layer
+            // If current layer has a bias, add the weighted value (1*b_i) to each neuron
+            if (l->_bias_weights != nullptr) l->_neuron
