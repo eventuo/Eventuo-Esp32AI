@@ -236,4 +236,7 @@ void FCNN::Propagate() {
             l->_neuronsNet = l->_weights->MultiplyVector(*l_1->_neuronsOut.get());
         }    
 
-        // Now activate neurons applying the activation function of
+        // Now activate neurons applying the activation function of this layer
+        // In math a_l = f(z_l)
+        for (int i = 0; i< l->_neuronsNet->size(); i++) {
+            // If current layer
