@@ -250,4 +250,8 @@ void FCNN::Propagate() {
 
 unique_ptr<vector<double>> FCNN::GetResult() {
     // Check
-    if (!this->_hasOutputs) throw runtime_error("GetResult() Error: mis
+    if (!this->_hasOutputs) throw runtime_error("GetResult() Error: missing an output layer.");
+
+    auto& out = this->_layers->at(this->_layers->size() - 1);
+    auto result = make_unique<vector<double>>();
+    result->a
