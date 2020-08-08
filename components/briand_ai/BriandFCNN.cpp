@@ -264,3 +264,8 @@ unique_ptr<vector<double>> FCNN::Predict(const vector<double>& inputs) {
     this->SetInput(inputs);
     this->Propagate();
 
+    // Get results
+    return this->GetResult();
+}
+
+double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, const
