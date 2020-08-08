@@ -254,4 +254,9 @@ unique_ptr<vector<double>> FCNN::GetResult() {
 
     auto& out = this->_layers->at(this->_layers->size() - 1);
     auto result = make_unique<vector<double>>();
-    result->a
+    result->assign(out->_neuronsOut->begin(), out->_neuronsOut->end());
+
+    return std::move(result);
+}
+
+unique_ptr<vector<double>> FCNN::Predict(c
