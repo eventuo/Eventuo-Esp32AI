@@ -259,4 +259,8 @@ unique_ptr<vector<double>> FCNN::GetResult() {
     return std::move(result);
 }
 
-unique_ptr<vector<double>> FCNN::Predict(c
+unique_ptr<vector<double>> FCNN::Predict(const vector<double>& inputs) {
+      // Set inputs and propagate forward
+    this->SetInput(inputs);
+    this->Propagate();
+
