@@ -280,4 +280,7 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
 #if BRIAND_AI_DEBUG
     printf("\n\n    ------ TRAINING\n");
-    printf
+    printf("\nx = \n");
+    Matrix::PrintVector(inputs);
+    printf("\ny = \n");
+    Matrix::PrintVector(*outputLayer->_neuronsO
