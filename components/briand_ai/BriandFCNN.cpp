@@ -276,4 +276,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
     // Get results
     auto outputs = this->Predict(inputs);
-    const au
+    const auto& outputLayer = this->_layers->at(this->_layers->size() - 1);
+
+#if BRIAND_AI_DEBUG
+    printf("\n\n    ------ TRAINING\n");
+    printf
