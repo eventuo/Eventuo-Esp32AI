@@ -272,4 +272,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
     // Check
     if (this->_layers == nullptr || this->_layers->size() < 1) throw runtime_error("Cannot backpropagate: missing an input layer.");
     if (!this->_hasOutputs) throw runtime_error("Cannot backpropagate: missing an output layer.");
-    if (targets.size() != this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size()) throw out_of_range("Invalid target
+    if (targets.size() != this->_layers->at(this->_layers->size() - 1)->_neuronsOut->size()) throw out_of_range("Invalid targets: size must be equal to outputs.");
+
+    // Get results
+    auto outputs = this->Predict(inputs);
+    const au
