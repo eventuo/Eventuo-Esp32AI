@@ -283,4 +283,11 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
     printf("\nx = \n");
     Matrix::PrintVector(inputs);
     printf("\ny = \n");
-    Matrix::PrintVector(*outputLayer->_neuronsO
+    Matrix::PrintVector(*outputLayer->_neuronsOut.get());
+    printf("\ny^ = \n");
+    Matrix::PrintVector(targets);
+#endif
+
+    double totalError = 0;
+
+    // Calculate errors at outpu
