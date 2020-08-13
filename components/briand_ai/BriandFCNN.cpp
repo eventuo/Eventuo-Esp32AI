@@ -293,4 +293,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
     // Calculate errors at output and total error. Save in J vector
     auto J = make_unique<vector<double>>(targets);
     for(size_t i = 0; i < J->size(); i++) {
-   
+        J->at(i) = outputLayer->_E(targets[i], outputs->at(i)); 
+        totalError += J->at(i);
+    }
+
+    // Calculate delta for output 
