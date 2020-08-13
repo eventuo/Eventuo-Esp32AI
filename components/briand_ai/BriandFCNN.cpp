@@ -297,4 +297,7 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         totalError += J->at(i);
     }
 
-    // Calculate delta for output 
+    // Calculate delta for output layer
+    outputLayer->_delta = make_unique<vector<double>>();  
+    for (size_t i = 0; i < outputLayer->_neuronsNet->size(); i++) {
+        // (y - y^
