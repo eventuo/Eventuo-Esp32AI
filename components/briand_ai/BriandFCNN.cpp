@@ -290,4 +290,7 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
     double totalError = 0;
 
-    // Calculate errors at outpu
+    // Calculate errors at output and total error. Save in J vector
+    auto J = make_unique<vector<double>>(targets);
+    for(size_t i = 0; i < J->size(); i++) {
+   
