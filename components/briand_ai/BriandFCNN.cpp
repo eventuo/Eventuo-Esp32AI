@@ -308,4 +308,11 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
     printf("\nTotal error = %.5f\n", totalError);
     printf("\nJ = \n");
     Matrix::PrintVector(*J.get());
-    printf("\nde
+    printf("\ndelta_L = \n");
+    Matrix::PrintVector(*outputLayer->_delta.get());
+#endif
+
+    // Destroy unecessary objects
+    J.reset();
+
+    // Backward iterate (until inpu
