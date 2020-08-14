@@ -304,4 +304,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         outputLayer->_delta->push_back( (outputs->at(i) - targets[i]) * outputLayer->_df(outputLayer->_neuronsNet->at(i)) );
     }
 
-#if BRIAND_
+#if BRIAND_AI_DEBUG
+    printf("\nTotal error = %.5f\n", totalError);
+    printf("\nJ = \n");
+    Matrix::PrintVector(*J.get());
+    printf("\nde
