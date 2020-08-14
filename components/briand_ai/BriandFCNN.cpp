@@ -300,4 +300,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
     // Calculate delta for output layer
     outputLayer->_delta = make_unique<vector<double>>();  
     for (size_t i = 0; i < outputLayer->_neuronsNet->size(); i++) {
-        // (y - y^
+        // (y - y^)*df(z)
+        outputLayer->_delta->push_back( (outputs->at(i) - targets[i]) * outputLayer->_df(outputLayer->_neuronsNet->at(i)) );
+    }
+
+#if BRIAND_
