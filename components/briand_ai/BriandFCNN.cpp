@@ -317,4 +317,8 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
     // Backward iterate (until input is reached).
     for (size_t k = this->_layers->size() - 1; k >= 1; k--) {
-        /* REMEMBER that at level l there is always the l-1 weight
+        /* REMEMBER that at level l there is always the l-1 weights matrix by construction!
+            
+            x --W(0)--> h1 --W(1)--> h1 --W(2)--> h2 --W(3)--> o
+
+            so at layer h2 the output 
