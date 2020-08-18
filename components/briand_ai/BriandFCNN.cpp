@@ -326,4 +326,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         */
 
         // Current layer l
-        const a
+        const auto& l = this->_layers->at(k);
+
+        // Prev layer l-1
+        const auto& l_prev = this->_layers->at(k-1);
+
+        // Vector-Vecto
