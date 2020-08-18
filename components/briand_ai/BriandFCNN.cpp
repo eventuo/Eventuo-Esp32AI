@@ -331,4 +331,6 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         // Prev layer l-1
         const auto& l_prev = this->_layers->at(k-1);
 
-        // Vector-Vecto
+        // Vector-Vector product delta_l+1 by transposed output of layer l
+        // Here l = l+1 so l = l-1
+        auto m1 = Matrix::DotMultiplyVecto
