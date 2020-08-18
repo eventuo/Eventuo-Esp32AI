@@ -321,4 +321,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
             
             x --W(0)--> h1 --W(1)--> h1 --W(2)--> h2 --W(3)--> o
 
-            so at layer h2 the output 
+            so at layer h2 the output matrix will be updated, at h1 the W2 and so on.
+            Input layer has no weights.
+        */
+
+        // Current layer l
+        const a
