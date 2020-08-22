@@ -333,4 +333,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
         // Vector-Vector product delta_l+1 by transposed output of layer l
         // Here l = l+1 so l = l-1
-        auto m1 = Matrix::DotMultiplyVecto
+        auto m1 = Matrix::DotMultiplyVectors(*l->_delta.get(), *l_prev->_neuronsOut.get());
+
+        // Multiply all elements by learning rate
+        m1->MultiplyScalar(learningRate);
+
+#if B
