@@ -341,3 +341,7 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 #if BRIAND_AI_DEBUG
         printf("\nUpdating W_%d(%d,%d) ; b(%d). Using m1(%d,%d) = delta(%d)*a_l-1(%d) where l = %d\n"
             , k
+            , l->_weights->Rows()
+            , l->_weights->Cols()
+            , l->_type != LayerType::Output ? l->_bias_weights->size() : 0
+      
