@@ -344,4 +344,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
             , l->_weights->Rows()
             , l->_weights->Cols()
             , l->_type != LayerType::Output ? l->_bias_weights->size() : 0
-      
+            , m1->Rows()
+            , m1->Cols()
+            , l->_delta->size()
+            , l_prev->_neuronsOut->size()
+            , k
+     
