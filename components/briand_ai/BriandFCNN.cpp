@@ -349,4 +349,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
             , l->_delta->size()
             , l_prev->_neuronsOut->size()
             , k
-     
+        );
+#endif
+
+        // Check
+        assert(m1->Rows() == l->_weights->Rows());
+        assert(m1->Cols() == l->_w
