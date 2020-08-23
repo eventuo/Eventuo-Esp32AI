@@ -338,4 +338,6 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         // Multiply all elements by learning rate
         m1->MultiplyScalar(learningRate);
 
-#if B
+#if BRIAND_AI_DEBUG
+        printf("\nUpdating W_%d(%d,%d) ; b(%d). Using m1(%d,%d) = delta(%d)*a_l-1(%d) where l = %d\n"
+            , k
