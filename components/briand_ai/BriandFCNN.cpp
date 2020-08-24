@@ -360,4 +360,10 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         // Update weights and bias at layer l
         for (int i=0; i < l->_weights->Rows(); i++) {
             for (int j=0; j < l->_weights->Cols(); j++) {
-                l->_weights->at(i,j
+                l->_weights->at(i,j) -= m1->at(i,j); 
+            }
+            
+            l_prev->_bias_weights->at(i) -= learningRate * l->_delta->at(i);
+        }
+
+     
