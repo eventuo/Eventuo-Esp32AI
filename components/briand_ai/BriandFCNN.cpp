@@ -358,4 +358,6 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         assert(l->_delta->size() == l_prev->_bias_weights->size());
 
         // Update weights and bias at layer l
-        for (i
+        for (int i=0; i < l->_weights->Rows(); i++) {
+            for (int j=0; j < l->_weights->Cols(); j++) {
+                l->_weights->at(i,j
