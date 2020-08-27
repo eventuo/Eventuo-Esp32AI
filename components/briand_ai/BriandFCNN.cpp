@@ -367,4 +367,6 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
         }
 
         // Calculate new delta (from current layer) to be delta_(l+1) in next for cycle
-        // delta_l = ( Wl_T dot delta_
+        // delta_l = ( Wl_T dot delta_l+1 ) *hadamard df(z_l)
+        auto Wl_T = l->_weights->Transpose();
+        auto temp = Wl_T->MultiplyVector(*l->_delta.get()
