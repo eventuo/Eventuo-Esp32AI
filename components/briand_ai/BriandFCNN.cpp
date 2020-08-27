@@ -366,4 +366,5 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
             l_prev->_bias_weights->at(i) -= learningRate * l->_delta->at(i);
         }
 
-     
+        // Calculate new delta (from current layer) to be delta_(l+1) in next for cycle
+        // delta_l = ( Wl_T dot delta_
