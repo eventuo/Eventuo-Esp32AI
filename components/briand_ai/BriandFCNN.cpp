@@ -373,4 +373,12 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 
         l_prev->_delta = make_unique<vector<double>>();
         for (int i=0; i < l->_neuronsNet->size(); i++) {
-         
+            l_prev->_delta->push_back( temp->at(i) * l->_df(l->_neuronsNet->at(i)) );
+        }
+    }
+
+    return totalError;
+}
+
+void FCNN::PrintResult() {
+    // Check
