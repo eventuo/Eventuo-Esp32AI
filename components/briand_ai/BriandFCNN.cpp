@@ -383,4 +383,9 @@ double FCNN::Train(const vector<double>& inputs, const vector<double>& targets, 
 void FCNN::PrintResult() {
     // Check
     if (!this->_hasOutputs) throw runtime_error("GetResult() Error: missing an output layer.");
-    auto& out = this->_layers->at(this->_layers->size() 
+    auto& out = this->_layers->at(this->_layers->size() - 1);
+    Matrix::PrintVector(*out->_neuronsOut.get());
+    
+    /*
+    printf("| ");
+    for (auto it = out->_neuronsOut->begin(
