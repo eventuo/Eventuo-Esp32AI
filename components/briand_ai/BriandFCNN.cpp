@@ -388,4 +388,9 @@ void FCNN::PrintResult() {
     
     /*
     printf("| ");
-    for (auto it = out->_neuronsOut->begin(
+    for (auto it = out->_neuronsOut->begin(); it != out->_neuronsOut->end(); it++)
+        printf(" %lf ", *it);
+    printf(" |\n");
+    */
+}
+
