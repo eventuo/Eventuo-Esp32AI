@@ -15,3 +15,4 @@
 */
 
 #include "BriandImage.hxx"
+
