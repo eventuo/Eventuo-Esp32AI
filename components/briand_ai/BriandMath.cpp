@@ -11,4 +11,11 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, se
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "BriandMath.hxx"
+
+using namespace std;
+
+double Briand::Math::WeightedSum(const vector<double>& values, con
