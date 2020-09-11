@@ -18,4 +18,6 @@
 
 using namespace std;
 
-double Briand::Math::WeightedSum(const vector<double>& values, con
+double Briand::Math::WeightedSum(const vector<double>& values, const vector<double>& weights) {
+    // Check vector length is equal
+    if (values.size() != weights.size()) throw runtime_error("Briand::Activa
