@@ -20,4 +20,8 @@ using namespace std;
 
 double Briand::Math::WeightedSum(const vector<double>& values, const vector<double>& weights) {
     // Check vector length is equal
-    if (values.size() != weights.size()) throw runtime_error("Briand::Activa
+    if (values.size() != weights.size()) throw runtime_error("Briand::ActivationFunctions::WeightedSum - values and weights mismatch size.");
+
+    double sum = 0.0;
+
+    for (uint32_t i = 0; i < values.size();
