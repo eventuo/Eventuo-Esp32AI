@@ -30,4 +30,5 @@ double Briand::Math::WeightedSum(const vector<double>& values, const vector<doub
 }
 
 double Briand::Math::Random() {
-    return esp_random() / static_cast<double>(UINT3
+    return esp_random() / static_cast<double>(UINT32_MAX);
+}
