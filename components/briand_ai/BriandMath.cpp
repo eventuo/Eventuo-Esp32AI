@@ -24,4 +24,10 @@ double Briand::Math::WeightedSum(const vector<double>& values, const vector<doub
 
     double sum = 0.0;
 
-    for (uint32_t i = 0; i < values.size();
+    for (uint32_t i = 0; i < values.size(); i++) sum += values.at(i) * weights.at(i);
+
+    return sum; 
+}
+
+double Briand::Math::Random() {
+    return esp_random() / static_cast<double>(UINT3
