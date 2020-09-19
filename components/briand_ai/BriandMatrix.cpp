@@ -17,4 +17,8 @@
 #include "BriandMatrix.hxx"
 
 using namespace std;
-using name
+using namespace Briand;
+
+Matrix::Matrix(const int& rows, const int& cols, const double& initialValue /*= 0.0*/) {
+    this->_rows = rows;
+    
