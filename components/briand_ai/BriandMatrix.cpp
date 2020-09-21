@@ -21,4 +21,8 @@ using namespace Briand;
 
 Matrix::Matrix(const int& rows, const int& cols, const double& initialValue /*= 0.0*/) {
     this->_rows = rows;
-    
+    this->_cols = cols;
+    this->InstanceMatrix(initialValue);
+}
+
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>&
