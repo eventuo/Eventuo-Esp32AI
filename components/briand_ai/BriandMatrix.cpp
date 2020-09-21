@@ -33,4 +33,6 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& m) {
     size_t i = 0;
     size_t j;
 
-    fo
+    for (auto& r : m) {
+        if (this->_cols == 0) this->_cols = r.size();
+        if (this->_cols != r.size()) throw out_of_range("M
