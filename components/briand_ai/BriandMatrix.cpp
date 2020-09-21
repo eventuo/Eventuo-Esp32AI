@@ -25,4 +25,12 @@ Matrix::Matrix(const int& rows, const int& cols, const double& initialValue /*= 
     this->InstanceMatrix(initialValue);
 }
 
-Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>&
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& m) {
+    this->_rows = m.size();
+    this->_cols = 0;
+    
+    this->_matrix = new double*[this->_rows];
+    size_t i = 0;
+    size_t j;
+
+    fo
