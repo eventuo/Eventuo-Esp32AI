@@ -45,4 +45,8 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& m) {
 
 Matrix::Matrix(const Matrix& other) {
     // Instance new matrix with same rows and cols
-    this->_rows = o
+    this->_rows = other.Rows();
+    this->_cols = other.Cols();
+    
+    // Copy matrix weights while instancing
+    this->_matrix = new do
