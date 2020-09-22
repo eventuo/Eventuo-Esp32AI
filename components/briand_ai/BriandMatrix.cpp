@@ -35,4 +35,7 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& m) {
 
     for (auto& r : m) {
         if (this->_cols == 0) this->_cols = r.size();
-        if (this->_cols != r.size()) throw out_of_range("M
+        if (this->_cols != r.size()) throw out_of_range("Matrix cols not uniform in size");
+        this->_matrix[i] = new double[this->_cols];
+        j = 0;
+        for (auto& c : r) this
