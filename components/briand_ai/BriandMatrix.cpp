@@ -52,4 +52,9 @@ Matrix::Matrix(const Matrix& other) {
     this->_matrix = new double*[this->_rows];
     for (size_t i = 0; i < this->_rows; i++) {
         this->_matrix[i] = new double[this->_cols];
-        
+        for (size_t j = 0; j < this->_cols; j++)
+            this->_matrix[i][j] = other[i][j];
+    }    
+}
+
+void Matrix::Insta
