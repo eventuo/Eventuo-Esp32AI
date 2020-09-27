@@ -57,4 +57,6 @@ Matrix::Matrix(const Matrix& other) {
     }    
 }
 
-void Matrix::Insta
+void Matrix::InstanceMatrix(const double& initialValue /* = 0.0*/) {
+    this->_matrix = new double*[this->_rows];
+    for (size_t i = 0; i < this->_
