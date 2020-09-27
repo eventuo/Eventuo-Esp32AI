@@ -49,4 +49,7 @@ Matrix::Matrix(const Matrix& other) {
     this->_cols = other.Cols();
     
     // Copy matrix weights while instancing
-    this->_matrix = new do
+    this->_matrix = new double*[this->_rows];
+    for (size_t i = 0; i < this->_rows; i++) {
+        this->_matrix[i] = new double[this->_cols];
+        
