@@ -62,4 +62,9 @@ void Matrix::InstanceMatrix(const double& initialValue /* = 0.0*/) {
     for (size_t i = 0; i < this->_rows; i++) {
         this->_matrix[i] = new double[this->_cols];
         std::fill_n(this->_matrix[i], this->_cols, initialValue);
-   
+    }
+}
+
+Matrix::~Matrix() {
+    for (size_t i = 0; i < this->_rows; i++) {
+        if (this->_matrix[i] != nullptr) delete[
