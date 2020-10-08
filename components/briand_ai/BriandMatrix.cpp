@@ -67,4 +67,11 @@ void Matrix::InstanceMatrix(const double& initialValue /* = 0.0*/) {
 
 Matrix::~Matrix() {
     for (size_t i = 0; i < this->_rows; i++) {
-        if (this->_matrix[i] != nullptr) delete[
+        if (this->_matrix[i] != nullptr) delete[] this->_matrix[i];
+    }
+    
+    if (this->_matrix != nullptr) delete[] this->_matrix;
+}
+
+const size_t& Matrix::Rows() const {
+    retu
