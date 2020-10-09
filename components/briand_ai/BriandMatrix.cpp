@@ -74,4 +74,12 @@ Matrix::~Matrix() {
 }
 
 const size_t& Matrix::Rows() const {
-    retu
+    return this->_rows;
+}
+
+const size_t& Matrix::Cols() const {
+    return this->_cols;
+}
+
+void Matrix::Randomize() {
+    for (si
