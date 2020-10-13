@@ -82,4 +82,7 @@ const size_t& Matrix::Cols() const {
 }
 
 void Matrix::Randomize() {
-    for (si
+    for (size_t i = 0; i < this->_rows; i++) {
+        for (size_t j = 0; j < this->_cols; j++) {
+            // Random between 0 and 1
+  
