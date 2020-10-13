@@ -85,4 +85,8 @@ void Matrix::Randomize() {
     for (size_t i = 0; i < this->_rows; i++) {
         for (size_t j = 0; j < this->_cols; j++) {
             // Random between 0 and 1
-  
+            this->at(i, j) = static_cast<double>(esp_random()) / static_cast<double>(RAND_MAX);        }
+    }
+}
+
+void Matrix::MultiplyScalar(con
