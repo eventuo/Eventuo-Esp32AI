@@ -89,4 +89,7 @@ void Matrix::Randomize() {
     }
 }
 
-void Matrix::MultiplyScalar(con
+void Matrix::MultiplyScalar(const double& k) {
+    for (size_t i = 0; i < this->_rows; i++) {
+        for (size_t j = 0; j < this->_cols; j++) {
+            t
