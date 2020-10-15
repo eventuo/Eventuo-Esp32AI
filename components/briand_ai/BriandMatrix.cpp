@@ -98,4 +98,5 @@ void Matrix::MultiplyScalar(const double& k) {
 }
 
 unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
- 
+    // Condition: A x B is possible if number of cols in A equals the number of rows in B
+    if (other.Rows() != this->Cols()) throw out_of_range("
