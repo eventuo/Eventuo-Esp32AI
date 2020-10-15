@@ -99,4 +99,7 @@ void Matrix::MultiplyScalar(const double& k) {
 
 unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
     // Condition: A x B is possible if number of cols in A equals the number of rows in B
-    if (other.Rows() != this->Cols()) throw out_of_range("
+    if (other.Rows() != this->Cols()) throw out_of_range("Matrix A(m,n)*B(n,p) failed: n has different value!");
+
+    // A(m,n) * B(n,p) = C(m,p)
+    auto result = make_unique<Matrix>(this->_rows
