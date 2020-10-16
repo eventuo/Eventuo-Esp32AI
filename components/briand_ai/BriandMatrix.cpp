@@ -102,4 +102,9 @@ unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
     if (other.Rows() != this->Cols()) throw out_of_range("Matrix A(m,n)*B(n,p) failed: n has different value!");
 
     // A(m,n) * B(n,p) = C(m,p)
-    auto result = make_unique<Matrix>(this->_rows
+    auto result = make_unique<Matrix>(this->_rows, other.Cols(), 0.0); 
+
+    const size_t N = other.Rows();
+
+    for (size_t i = 0; i < result->Rows(); i++) {
+        for (size_t j = 0;
