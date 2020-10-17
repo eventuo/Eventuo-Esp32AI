@@ -110,4 +110,11 @@ unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
         for (size_t j = 0; j < result->Cols(); j++) {
             for (size_t k = 0; k < N; k++)
                 (*result.get())[i][j] += (*this)[i][k] * other[k][j];
-    
+        }
+    }
+
+    return std::move(result);
+}
+
+unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
+    // Condition: A
