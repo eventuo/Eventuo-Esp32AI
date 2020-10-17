@@ -117,4 +117,5 @@ unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
 }
 
 unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
-    // Condition: A
+    // Condition: A x B is possible if number of cols in A equals the number of rows in B
+    if (other.Rows() != this->Rows()) throw out_of_range("Ma
