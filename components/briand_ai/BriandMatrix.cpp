@@ -107,4 +107,7 @@ unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
     const size_t N = other.Rows();
 
     for (size_t i = 0; i < result->Rows(); i++) {
-        for (size_t j = 0;
+        for (size_t j = 0; j < result->Cols(); j++) {
+            for (size_t k = 0; k < N; k++)
+                (*result.get())[i][j] += (*this)[i][k] * other[k][j];
+    
