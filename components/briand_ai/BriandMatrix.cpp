@@ -119,4 +119,7 @@ unique_ptr<Matrix> Matrix::MultiplyMatrix(const Matrix& other) {
 unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
     // Condition: A x B is possible if number of cols in A equals the number of rows in B
     if (other.Rows() != this->Rows()) throw out_of_range("Matrix A(m,n)*B(m,n) Hadamard failed: m has different value!");
-    if (other.Cols() != this->Cols()) throw out_of_range("M
+    if (other.Cols() != this->Cols()) throw out_of_range("Matrix A(m,n)*B(m,n) Hadamard failed: n has different value!");
+
+    // A(m,n) * B(m,n) = C(m,n)
+    auto result = make_unique<Matrix>(th
