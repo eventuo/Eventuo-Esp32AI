@@ -122,4 +122,9 @@ unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
     if (other.Cols() != this->Cols()) throw out_of_range("Matrix A(m,n)*B(m,n) Hadamard failed: n has different value!");
 
     // A(m,n) * B(m,n) = C(m,n)
-    auto result = make_unique<Matrix>(th
+    auto result = make_unique<Matrix>(this->_rows, this->_cols, 0.0); 
+
+    const size_t N = other.Rows();
+
+    for (size_t i = 0; i < result->Rows(); i++) {
+        for (size_t j = 0; j < r
