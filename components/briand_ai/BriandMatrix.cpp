@@ -135,4 +135,5 @@ unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
     return std::move(result);
 }
 
-u
+unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
+    // Condition: A x v is possible if number of cols i
