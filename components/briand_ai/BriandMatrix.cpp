@@ -127,4 +127,12 @@ unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
     const size_t N = other.Rows();
 
     for (size_t i = 0; i < result->Rows(); i++) {
-        for (size_t j = 0; j < r
+        for (size_t j = 0; j < result->Cols(); j++) {
+            (*result.get())[i][j] += (*this)[i][j] * other[i][j];
+        }
+    }
+
+    return std::move(result);
+}
+
+u
