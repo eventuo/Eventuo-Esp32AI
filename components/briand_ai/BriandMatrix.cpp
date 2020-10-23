@@ -136,4 +136,5 @@ unique_ptr<Matrix> Matrix::MultiplyMatrixHadamard(const Matrix& other) {
 }
 
 unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
-    // Condition: A x v is possible if number of cols i
+    // Condition: A x v is possible if number of cols in A equals the number of components in v
+    if (v.size() != this->Cols()) throw out_of_range("Matrix A(m,n)*v(n) fai
