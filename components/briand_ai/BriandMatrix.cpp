@@ -152,4 +152,6 @@ unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
     return std::move(r);
 }
 
-unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<dou
+unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const vector<double>& v2t) {
+    // v1(m) * v2(p) = Matrix(m,p)
+    auto result = make_unique<Matrix>(v1.size(), v2t.size()
