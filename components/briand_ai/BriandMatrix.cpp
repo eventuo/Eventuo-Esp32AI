@@ -143,3 +143,7 @@ unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
 
     for (size_t i = 0; i < this->Rows(); i++) {
         double ri = 0;
+        for (size_t j = 0; j < this->Cols(); j++) {
+            ri += this->_matrix[i][j] * v[j];
+        }
+    
