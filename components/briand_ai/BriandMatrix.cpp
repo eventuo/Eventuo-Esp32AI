@@ -146,4 +146,10 @@ unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
         for (size_t j = 0; j < this->Cols(); j++) {
             ri += this->_matrix[i][j] * v[j];
         }
-    
+        r->push_back(ri);
+    }
+
+    return std::move(r);
+}
+
+unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<dou
