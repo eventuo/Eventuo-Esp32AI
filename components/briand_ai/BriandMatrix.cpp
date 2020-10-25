@@ -154,4 +154,10 @@ unique_ptr<vector<double>> Matrix::MultiplyVector(const vector<double>& v) {
 
 unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const vector<double>& v2t) {
     // v1(m) * v2(p) = Matrix(m,p)
-    auto result = make_unique<Matrix>(v1.size(), v2t.size()
+    auto result = make_unique<Matrix>(v1.size(), v2t.size(), 0.0);
+
+    /*
+        
+        |v1|               |v1t1 v1t2|
+        |v2| * |t1 t2|   = |v2t1 v2t2|
+        |v3|           
