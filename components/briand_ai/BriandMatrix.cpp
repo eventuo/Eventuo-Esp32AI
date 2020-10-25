@@ -166,4 +166,11 @@ unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const ve
 
     for (size_t i=0; i < v1.size(); i++) {
         for (size_t j=0; j < v2t.size(); j++) {
-   
+            result->at(i, j) = (v1[i] * v2t[j]);
+        }    
+    }
+
+    return std::move(result); 
+}
+
+unique_ptr<Matrix> Matrix:
