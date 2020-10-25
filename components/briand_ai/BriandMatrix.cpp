@@ -173,4 +173,7 @@ unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const ve
     return std::move(result); 
 }
 
-unique_ptr<Matrix> Matrix:
+unique_ptr<Matrix> Matrix::ApplyFunction(double (*f)(const double& x)) {
+    auto result = make_unique<Matrix>(this->_rows, this->_cols, 0.0);  
+
+    for (size_t i = 0; i < thi
