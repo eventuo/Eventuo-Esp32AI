@@ -160,4 +160,10 @@ unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const ve
         
         |v1|               |v1t1 v1t2|
         |v2| * |t1 t2|   = |v2t1 v2t2|
-        |v3|           
+        |v3|               |v3t1 v3t2|
+        
+    */
+
+    for (size_t i=0; i < v1.size(); i++) {
+        for (size_t j=0; j < v2t.size(); j++) {
+   
