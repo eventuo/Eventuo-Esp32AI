@@ -180,4 +180,10 @@ unique_ptr<Matrix> Matrix::ApplyFunction(double (*f)(const double& x)) {
         for (size_t j = 0; j < this->_cols; j++) {
             result->at(i, j) = f(this->_matrix[i][j]);
         }
-    
+    }
+
+    return std::move(result);
+}
+
+unique_ptr<Matrix> Matrix::Transpose() {
+    auto result = make_unique<Matrix>(this->_cols,
