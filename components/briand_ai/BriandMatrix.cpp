@@ -190,4 +190,11 @@ unique_ptr<Matrix> Matrix::Transpose() {
 
     for (size_t i = 0; i < this->_rows; i++) {
         for (size_t j = 0; j < this->_cols; j++) {
-            (*r
+            (*result.get())[j][i] = this->_matrix[i][j];
+        }
+    }
+
+    return std::move(result);
+}
+
+double*& Matrix::operator[](const size_t& idx) 
