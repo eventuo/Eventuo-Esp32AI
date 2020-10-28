@@ -186,4 +186,8 @@ unique_ptr<Matrix> Matrix::ApplyFunction(double (*f)(const double& x)) {
 }
 
 unique_ptr<Matrix> Matrix::Transpose() {
-    auto result = make_unique<Matrix>(this->_cols,
+    auto result = make_unique<Matrix>(this->_cols, this->_rows, 0.0); 
+
+    for (size_t i = 0; i < this->_rows; i++) {
+        for (size_t j = 0; j < this->_cols; j++) {
+            (*r
