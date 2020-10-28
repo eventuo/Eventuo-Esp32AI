@@ -176,4 +176,8 @@ unique_ptr<Matrix> Matrix::DotMultiplyVectors(const vector<double>& v1, const ve
 unique_ptr<Matrix> Matrix::ApplyFunction(double (*f)(const double& x)) {
     auto result = make_unique<Matrix>(this->_rows, this->_cols, 0.0);  
 
-    for (size_t i = 0; i < thi
+    for (size_t i = 0; i < this->_rows; i++) {
+        for (size_t j = 0; j < this->_cols; j++) {
+            result->at(i, j) = f(this->_matrix[i][j]);
+        }
+    
