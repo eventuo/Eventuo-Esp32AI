@@ -205,4 +205,7 @@ double& Matrix::at(const size_t& i, const size_t& j) {
     return (this->_matrix[i][j]);
 }
 
-void Ma
+void Matrix::Print() {
+    for (size_t i = 0; i < this->_rows; i++) {
+        printf("|  ");
+        for (size_t j = 0; j < this->_cols; j++) 
