@@ -197,4 +197,12 @@ unique_ptr<Matrix> Matrix::Transpose() {
     return std::move(result);
 }
 
-double*& Matrix::operator[](const size_t& idx) 
+double*& Matrix::operator[](const size_t& idx) const {
+    return this->_matrix[idx];
+}
+
+double& Matrix::at(const size_t& i, const size_t& j) {
+    return (this->_matrix[i][j]);
+}
+
+void Ma
