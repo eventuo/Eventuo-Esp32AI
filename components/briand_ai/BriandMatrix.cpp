@@ -208,4 +208,11 @@ double& Matrix::at(const size_t& i, const size_t& j) {
 void Matrix::Print() {
     for (size_t i = 0; i < this->_rows; i++) {
         printf("|  ");
-        for (size_t j = 0; j < this->_cols; j++) 
+        for (size_t j = 0; j < this->_cols; j++) {
+            printf("%.2lf  ", this->_matrix[i][j]);
+        }
+        printf("|\n");
+    }
+}
+
+void Matrix::PrintVector(const vector<d
