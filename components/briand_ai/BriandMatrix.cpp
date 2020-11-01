@@ -221,3 +221,6 @@ void Matrix::PrintVector(const vector<double>& v) {
         printf("%.2lf  ", v[j]);
     }
     printf("|\n");
+}
+
+
