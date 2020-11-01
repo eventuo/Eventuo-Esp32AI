@@ -134,3 +134,133 @@
 					break;
 				}
 			}
+		}
+	}
+
+	UBaseType_t uxTaskGetNumberOfTasks() {
+		if (BRIAND_TASK_POOL == nullptr) return 0;
+		return static_cast<UBaseType_t>(BRIAND_TASK_POOL->size());
+	}
+
+	UBaseType_t uxTaskGetSystemState( TaskStatus_t * const pxTaskStatusArray, const UBaseType_t uxArraySize, uint32_t * const pulTotalRunTime ) {
+		UBaseType_t max = 0;
+		if (uxArraySize == 0) return 0;
+		if (pulTotalRunTime != NULL) *pulTotalRunTime = 0;
+		if (BRIAND_TASK_POOL != nullptr && pxTaskStatusArray != NULL) {
+			max = (uxArraySize < static_cast<UBaseType_t>(BRIAND_TASK_POOL->size()) ? uxArraySize :  static_cast<UBaseType_t>(BRIAND_TASK_POOL->size()));
+			for (unsigned short i=0; i<max; i++) {
+				bzero(&pxTaskStatusArray[i], sizeof(TaskStatus_t));
+				pxTaskStatusArray[i].xTaskNumber = i;
+				pxTaskStatusArray[i].pcTaskName = BRIAND_TASK_POOL->at(i)->name.c_str();
+				//
+				// TODO : calculate phtread stack size
+				//
+				pxTaskStatusArray[i].usStackHighWaterMark = 0;
+			}
+		}
+		return max;
+	}
+
+	esp_err_t nvs_flash_init(void) { return ESP_OK; }
+	esp_err_t nvs_flash_erase(void) { return ESP_OK; }
+	unsigned int esp_random() {
+		return static_cast<unsigned int>(rand());
+	}
+
+	esp_pthread_cfg_t esp_pthread_get_default_config(void) {
+		// Like the default configuration
+		esp_pthread_cfg_t defaults;
+		defaults.stack_size = 2048;
+		defaults.inherit_cfg = false;
+		defaults.pin_to_core = 0;
+		defaults.prio = 5;
+		defaults.thread_name = "pthread";
+		return defaults;
+	}
+
+	esp_err_t esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg) {
+		// do nothing
+		return ESP_OK;
+	}
+
+	esp_err_t esp_pthread_get_cfg(esp_pthread_cfg_t *p) {
+		if (p != NULL) *p = esp_pthread_get_default_config();
+		return ESP_OK;
+	}
+
+	esp_err_t esp_pthread_init(void) {
+		// do nothing
+		return ESP_OK;
+	}
+
+	// app_main() early declaration with extern keyword so will be found
+	extern "C" { void app_main(); }
+
+	// Ctrl-C event handler
+	bool CTRL_C_EVENT_SET = false;
+	void sig_hnd_Ctrl_C(int s) { CTRL_C_EVENT_SET = true; } 
+
+	// main() method required
+
+	int main(int argc, char** argv) {
+		// srand for esp_random()
+		srand(time(NULL));
+
+		// Initialization
+		LOG_LEVELS_MAP = make_unique<map<string, esp_log_level_t>>();
+
+		// Add this to the logging utils in order to deactivate output if necessary
+		esp_log_level_set("ESPLinuxPorting", ESP_LOG_NONE);
+
+		// Save this thread id
+		cout << "MAIN THREAD ID: " << std::this_thread::get_id() << endl;
+
+		// Attach Ctrl-C event handler
+		sighandler_t oldHandler = signal(SIGINT, sig_hnd_Ctrl_C);
+
+		// Will create the app_main() method and then remains waiting like esp
+		// Will also do the task scheduler work to check if any thread should be killed
+		cout << "main(): Starting. Creating task pool simulation..." << endl;
+
+		BRIAND_TASK_POOL = make_unique<vector<TaskHandle_t>>();
+		
+		cout << "main() Pool started. Use Ctrl-C to terminate" << endl;
+		
+		cout << "Starting app_main()" << endl;
+
+		app_main(); // This must not be a thread because it terminates!
+
+		cout << "app_main() started." << endl;
+
+		while(!CTRL_C_EVENT_SET) { 
+			// Check if any instanced thread should be terminated
+			for (int i=0; i<BRIAND_TASK_POOL->size(); i++) {
+				if (BRIAND_TASK_POOL->at(i)->toBeKilled) {
+					string tname = BRIAND_TASK_POOL->at(i)->name;
+					pthread_cancel(BRIAND_TASK_POOL->at(i)->handle);
+					delete BRIAND_TASK_POOL->at(i);
+					BRIAND_TASK_POOL->erase(BRIAND_TASK_POOL->begin() + i);
+					if (esp_log_level_get("ESPLinuxPorting") != ESP_LOG_NONE) cout << "Thread #" << i << "(" << tname << ") killed" << endl;
+				}
+			}
+				
+			std::this_thread::sleep_for( std::chrono::milliseconds(500) ); 
+		}
+
+		cout << endl << endl << "*** Ctrl-C event caught! ***" << endl << endl;
+
+		// Reset the original signal handler
+		signal(SIGINT, oldHandler);
+
+		// Kill all processes (from newer to older)
+		for (int i=BRIAND_TASK_POOL->size() - 1; i>=0; i--) {
+			if (BRIAND_TASK_POOL->at(i) != NULL) {
+				string tname = BRIAND_TASK_POOL->at(i)->name;
+				pthread_cancel(BRIAND_TASK_POOL->at(i)->handle);
+				delete BRIAND_TASK_POOL->at(i);
+				cout << "Thread #" << i << "(" << tname << ") killed" << endl;
+			} 
+		}
+
+		LOG_LEVELS_MAP.reset();
+		BRIAND_TASK_POOL.reset();
