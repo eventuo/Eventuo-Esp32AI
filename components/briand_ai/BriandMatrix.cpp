@@ -215,4 +215,9 @@ void Matrix::Print() {
     }
 }
 
-void Matrix::PrintVector(const vector<d
+void Matrix::PrintVector(const vector<double>& v) {
+    printf("|  ");
+    for (size_t j = 0; j < v.size(); j++) {
+        printf("%.2lf  ", v[j]);
+    }
+    printf("|\n");
