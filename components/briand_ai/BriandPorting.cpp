@@ -264,3 +264,11 @@
 
 		LOG_LEVELS_MAP.reset();
 		BRIAND_TASK_POOL.reset();
+
+		cout << endl << endl << "*** All threads killed! Exiting. ***" << endl << endl;
+		raise(SIGINT);
+
+		return 0;
+	}
+
+#endif
