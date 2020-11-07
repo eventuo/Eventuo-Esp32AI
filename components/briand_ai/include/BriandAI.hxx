@@ -16,4 +16,11 @@
 
 #pragma once
 
-#ifndef
+#ifndef BRIAND_AI_H
+#define BRIAND_AI_H
+
+/* Library headers all-in-one for in-project include */
+
+#include "BriandInclude.hxx"
+#include "BriandMath.hxx"
+#in
