@@ -1,3 +1,4 @@
+
 /** Copyright (C) 2023 briand (https://github.com/briand-hub)
 
     This program is free software: you can redistribute it and/or modify
@@ -16,17 +17,13 @@
 
 #pragma once
 
-#ifndef BRIAND_AI_H
-#define BRIAND_AI_H
-
-/* Library headers all-in-one for in-project include */
+#ifndef BRIAND_CNN_H
+#define BRIAND_CNN_H
 
 #include "BriandInclude.hxx"
-#include "BriandMath.hxx"
-#include "BriandMatrix.hxx"
-#include "BriandImage.hxx"
-#include "BriandSimpleNN.hxx"
-#include "BriandFCNN.hxx"
-#include "BriandCNN.hxx"
+
+namespace Briand {
+    
+}
 
 #endif
