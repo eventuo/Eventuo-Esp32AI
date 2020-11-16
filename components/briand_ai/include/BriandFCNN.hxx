@@ -70,3 +70,128 @@ namespace Briand {
         /// @param neurons Number of neurons
         /// @param f Activation function (hidden and output layer only, mandatory)
         /// @param df Activation function derivative (hidden and output layer only, mandatory)
+        /// @param e Error/Cost function (output layer only, required)
+        /// @param de Error/Cost function derivative (output layer only, required)
+        NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de);
+
+        /// @brief Builds a layer with specified weights.
+        /// @param type Layer type
+        /// @param neurons Number of neurons
+        /// @param f Activation function (hidden and output layer only, mandatory)
+        /// @param df Activation function derivative (hidden and output layer only, mandatory)
+        /// @param e Error/Cost function (output layer only, required)
+        /// @param de Error/Cost function derivative (output layer only, required)
+        /// @param weights Weights to the next layer (input and hidden layers only). 1 row for each layer's neuron, 1 column for each previous layer neuron.
+        NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const Matrix& weights);
+
+        /// @brief Builds a layer with specified weights.
+        /// @param type Layer type
+        /// @param neurons Number of neurons
+        /// @param f Activation function (hidden and output layer only, mandatory)
+        /// @param df Activation function derivative (hidden and output layer only, mandatory)
+        /// @param e Error/Cost function (output layer only, required)
+        /// @param de Error/Cost function derivative (output layer only, required)
+        /// @param weights Weights to the next layer (input and hidden layers only). 1 row for each layer's neuron, 1 column for each previous layer neuron.
+        NeuralLayer(const LayerType& type, const size_t& neurons, ActivationFunction f, ActivationFunction df, ErrorFunction e, ErrorFunction de, const std::initializer_list<std::initializer_list<double>>& weights);
+
+        ~NeuralLayer();
+
+        /// @brief Set the error calculation function (output layer only)
+        /// @param fError Error calculation function
+        void SetOutputErrorAs(const ErrorFunction& fError);
+
+        /// @brief Set the bias weights (input and hidden layers only)
+        /// @param bias_weights The bias weight vector (value always 1)
+        void SetBiasWeights(const vector<double>& bias_weights);
+
+        /* The FCNN class can access to all properties and methods */
+        friend class FCNN;
+    }; 
+
+    /// @brief An empty Neural Network, without layers, neurons and connections.
+    /// Has no particular methods, just basic data structure and propagation forward.
+    /// Use it when you know what you are doing!
+    class FCNN {
+        protected:
+
+        /// @brief layers
+        unique_ptr<vector<unique_ptr<NeuralLayer>>> _layers;
+
+        /// @brief true when output layer is set
+        bool _hasOutputs;
+
+        public:
+        
+        /// @brief Build empty FCNN
+        FCNN();
+
+        ~FCNN();
+
+        /// @brief Adds input layer (can be called only once). STARTS THE NETWORK CREATION (must be first layer)
+        /// @param inputs Number of inputs
+        void AddInputLayer(const size_t& inputs);
+
+        /// @brief Adds input layer with values (can be called only once). STARTS THE NETWORK CREATION (must be first layer)
+        /// @param inputs Number of inputs
+        /// @param values Initial input values
+        void AddInputLayer(const size_t& inputs, const vector<double>& values);
+
+        /// @brief Set input for FCNN
+        /// @param values Input values
+        void SetInput(const vector<double>& values);
+ 
+        /// @brief Adds hidden layer, in sequence. CONTINUES NETWORK CREATION (must be a "middle" layer)
+        /// @param outputs Number of neurons
+        /// @param activationFunc Activation function
+        /// @param activationDer Activation function derivative
+        void AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFunc, const ActivationFunction& activationDer);
+
+        /// @brief Adds hidden layer, in sequence. CONTINUES NETWORK CREATION (must be a "middle" layer)
+        /// @param outputs Number of outputs
+        /// @param activationFunc Activation function
+        /// @param activationDer Activation function derivative
+        /// @param weights Weights from previous layer (must have 1 row for each layer's neuron, 1 column for each previous layer neuron)
+        void AddHiddenLayer(const size_t& neurons, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const Matrix& weights);
+
+        /// @brief Adds output layer (can be called only once). CLOSES THE NETWORK CREATION (must be latest layer)
+        /// @param outputs Number of outputs
+        /// @param activationFunc Activation function
+        /// @param activationDer Activation function derivative
+        /// @param errorFunc Error/cost function
+        /// @param errorFuncDer Error/cost function derivative
+        void AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const ErrorFunction& errorFunc, const ErrorFunction& errorFuncDer);
+        
+        /// @brief Adds output layer (can be called only once) with weights. CLOSES THE NETWORK CREATION (must be latest layer)
+        /// @param outputs Number of outputs
+        /// @param activationFunc Activation function
+        /// @param activationDer Activation function derivative
+        /// @param errorFunc Error/cost function
+        /// @param errorFuncDer Error/cost function derivative
+        /// @param weights Weights from previous layer (must have 1 row for each layer's neuron, 1 column for each previous layer neuron)
+        void AddOutputLayer(const size_t& outputs, const ActivationFunction& activationFunc, const ActivationFunction& activationDer, const ErrorFunction& errorFunc, const ErrorFunction& errorFuncDer, const Matrix& weights);
+    
+        /// @brief Propagates (forward).
+        void Propagate();
+
+        /// @brief Propagates the input forward and returns output neurons values
+        /// @param values Input values
+        /// @return Output neurons values (result)
+        unique_ptr<vector<double>> Predict(const vector<double>& inputs);
+
+        /// @brief Returns output neurons values after a Propagate()
+        /// @return Output neurons values (result)
+        unique_ptr<vector<double>> GetResult();
+
+        /// @brief Train FCNN once with given inputs and expected output values.
+        /// @param inputs Inputs (must be equal in size to input neurons!)
+        /// @param targets Target values (must be equal in size to output neurons!)
+        /// @param learningRate Learning rate
+        /// @return Total error (sum of errors)
+        double Train(const vector<double>& inputs, const vector<double>& targets, const double& learningRate);
+
+        /// @brief Print out result
+        void PrintResult();
+    };
+}
+
+#endif
