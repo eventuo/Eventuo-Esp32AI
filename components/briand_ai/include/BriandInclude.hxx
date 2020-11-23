@@ -67,3 +67,154 @@
         #endif
 
         // Define the entry point (app_main will never be called!)
+        extern "C" void app_main();
+    
+        //
+        // Here ESP types, objects, functions must be re-defined when needed.
+        //
+
+
+		using namespace std;
+
+		// GPIOS and system basics
+
+		typedef enum {
+			GPIO_NUM_NC = -1,    /*!< Use to signal not connected to S/W */
+			GPIO_NUM_0 = 0,     /*!< GPIO0, input and output */
+			GPIO_NUM_1 = 1,     /*!< GPIO1, input and output */
+			GPIO_NUM_2 = 2,     /*!< GPIO2, input and output */
+			GPIO_NUM_3 = 3,     /*!< GPIO3, input and output */
+			GPIO_NUM_4 = 4,     /*!< GPIO4, input and output */
+			GPIO_NUM_5 = 5,     /*!< GPIO5, input and output */
+			GPIO_NUM_6 = 6,     /*!< GPIO6, input and output */
+			GPIO_NUM_7 = 7,     /*!< GPIO7, input and output */
+			GPIO_NUM_8 = 8,     /*!< GPIO8, input and output */
+			GPIO_NUM_9 = 9,     /*!< GPIO9, input and output */
+			GPIO_NUM_10 = 10,   /*!< GPIO10, input and output */
+			GPIO_NUM_11 = 11,   /*!< GPIO11, input and output */
+			GPIO_NUM_12 = 12,   /*!< GPIO12, input and output */
+			GPIO_NUM_13 = 13,   /*!< GPIO13, input and output */
+			GPIO_NUM_14 = 14,   /*!< GPIO14, input and output */
+			GPIO_NUM_15 = 15,   /*!< GPIO15, input and output */
+			GPIO_NUM_16 = 16,   /*!< GPIO16, input and output */
+			GPIO_NUM_17 = 17,   /*!< GPIO17, input and output */
+			GPIO_NUM_18 = 18,   /*!< GPIO18, input and output */
+			GPIO_NUM_19 = 19,   /*!< GPIO19, input and output */
+			GPIO_NUM_20 = 20,   /*!< GPIO20, input and output */
+			GPIO_NUM_21 = 21,   /*!< GPIO21, input and output */
+			GPIO_NUM_26 = 26,   /*!< GPIO26, input and output */
+			GPIO_NUM_27 = 27,   /*!< GPIO27, input and output */
+			GPIO_NUM_28 = 28,   /*!< GPIO28, input and output */
+			GPIO_NUM_29 = 29,   /*!< GPIO29, input and output */
+			GPIO_NUM_30 = 30,   /*!< GPIO30, input and output */
+			GPIO_NUM_31 = 31,   /*!< GPIO31, input and output */
+			GPIO_NUM_32 = 32,   /*!< GPIO32, input and output */
+			GPIO_NUM_33 = 33,   /*!< GPIO33, input and output */
+			GPIO_NUM_34 = 34,   /*!< GPIO34, input and output */
+			GPIO_NUM_35 = 35,   /*!< GPIO35, input and output */
+			GPIO_NUM_36 = 36,   /*!< GPIO36, input and output */
+			GPIO_NUM_37 = 37,   /*!< GPIO37, input and output */
+			GPIO_NUM_38 = 38,   /*!< GPIO38, input and output */
+			GPIO_NUM_39 = 39,   /*!< GPIO39, input and output */
+			GPIO_NUM_40 = 40,   /*!< GPIO40, input and output */
+			GPIO_NUM_41 = 41,   /*!< GPIO41, input and output */
+			GPIO_NUM_42 = 42,   /*!< GPIO42, input and output */
+			GPIO_NUM_43 = 43,   /*!< GPIO43, input and output */
+			GPIO_NUM_44 = 44,   /*!< GPIO44, input and output */
+			GPIO_NUM_45 = 45,   /*!< GPIO45, input and output */
+			GPIO_NUM_46 = 46,   /*!< GPIO46, input mode only */
+			GPIO_NUM_MAX,
+		/** @endcond */
+		} gpio_num_t;
+		
+		#define GPIO_MODE_DEF_DISABLE         (0b00000000)
+		#define GPIO_MODE_DEF_INPUT           (0b00000001)    ///< bit mask for input
+		#define GPIO_MODE_DEF_OUTPUT          (0b00000010)    ///< bit mask for output
+		#define GPIO_MODE_DEF_OD              (0b00000100)    ///< bit mask for OD mode
+
+		typedef enum {
+			GPIO_MODE_DISABLE = GPIO_MODE_DEF_DISABLE,                                                         /*!< GPIO mode : disable input and output             */
+			GPIO_MODE_INPUT = GPIO_MODE_DEF_INPUT,                                                             /*!< GPIO mode : input only                           */
+			GPIO_MODE_OUTPUT = GPIO_MODE_DEF_OUTPUT,                                                           /*!< GPIO mode : output only mode                     */
+			GPIO_MODE_OUTPUT_OD = ((GPIO_MODE_DEF_OUTPUT) | (GPIO_MODE_DEF_OD)),                               /*!< GPIO mode : output only with open-drain mode     */
+			GPIO_MODE_INPUT_OUTPUT_OD = ((GPIO_MODE_DEF_INPUT) | (GPIO_MODE_DEF_OUTPUT) | (GPIO_MODE_DEF_OD)), /*!< GPIO mode : output and input with open-drain mode*/
+			GPIO_MODE_INPUT_OUTPUT = ((GPIO_MODE_DEF_INPUT) | (GPIO_MODE_DEF_OUTPUT)),                         /*!< GPIO mode : output and input mode                */
+		} gpio_mode_t;
+
+		#define esp_restart() { printf("\n\n***** esp_restart() SYSTEM REBOOT. Hit Ctrl-C to restart main program.*****\n\n"); }
+        #define gpio_set_level(n, l) { printf("\n\n***** GPIO %d => Level = %d*****\n\n", n, l); }
+		#define gpio_get_level(n) GPIO_MODE_DISABLE
+        #define gpio_set_direction(n, d) { printf("\n\n***** GPIO %d => Direction = %d*****\n\n", n, d); }
+
+        
+		// ERROR AND LOG FUNCTION
+
+		#define ESP_OK 0
+		#define ESP_FAIL -1
+		#define ESP_ERR_NOT_FOUND -2
+		#define ESP_ERR_NVS_NO_FREE_PAGES -3
+		#define ESP_ERR_NVS_NEW_VERSION_FOUND -4
+
+		typedef int esp_err_t;
+
+		const char *esp_err_to_name(esp_err_t code);
+
+		// LOGGING FUNCTIONS
+
+		typedef enum esp_log_level {
+			ESP_LOG_NONE,       /*!< No log output */
+			ESP_LOG_ERROR,      /*!< Critical errors, software module can not recover on its own */
+			ESP_LOG_WARN,       /*!< Error conditions from which recovery measures have been taken */
+			ESP_LOG_INFO,       /*!< Information messages which describe normal flow of events */
+			ESP_LOG_DEBUG,      /*!< Extra information which is not necessary for normal use (values, pointers, sizes, etc). */
+			ESP_LOG_VERBOSE     /*!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
+		} esp_log_level_t;
+
+		extern unique_ptr<map<string, esp_log_level_t>> LOG_LEVELS_MAP;
+		void esp_log_level_set(const char* tag, esp_log_level_t level);
+		esp_log_level_t esp_log_level_get(const char* tag);
+		#define ESP_LOGI(tag, _format, ...) { if(esp_log_level_get(tag) >= ESP_LOG_INFO) { printf("I "); printf(tag); printf(" "); printf(_format, ##__VA_ARGS__); } }
+		#define ESP_LOGV(tag, _format, ...) { if(esp_log_level_get(tag) >= ESP_LOG_VERBOSE) { printf("V "); printf(tag); printf(" "); printf(_format, ##__VA_ARGS__); } }
+		#define ESP_LOGD(tag, _format, ...) { if(esp_log_level_get(tag) >= ESP_LOG_DEBUG) { printf("D "); printf(tag); printf(" "); printf(_format, ##__VA_ARGS__); } }
+		#define ESP_LOGE(tag, _format, ...) { if(esp_log_level_get(tag) >= ESP_LOG_ERROR) { printf("E "); printf(tag); printf(" "); printf(_format, ##__VA_ARGS__); } }
+		#define ESP_LOGW(tag, _format, ...) { if(esp_log_level_get(tag) >= ESP_LOG_WARN) { printf("W "); printf(tag); printf(" "); printf(_format, ##__VA_ARGS__); } }
+
+		void ESP_ERROR_CHECK(esp_err_t e);
+
+
+		// FILESYSTEM FUNCTIONS
+
+		typedef struct {
+				const char* base_path;          /*!< File path prefix associated with the filesystem. */
+				const char* partition_label;    /*!< Optional, label of SPIFFS partition to use. If set to NULL, first partition with subtype=spiffs will be used. */
+				unsigned int max_files;         /*!< Maximum files that could be open at the same time. */
+				bool format_if_mount_failed;    /*!< If true, it will format the file system if it fails to mount. */
+		} esp_vfs_spiffs_conf_t;
+
+		#define esp_vfs_spiffs_register(conf_ptr) ESP_OK
+		#define esp_spiffs_info(l, t, u) ESP_OK
+		#define esp_vfs_spiffs_unregister(ptr) ESP_OK
+
+		
+		// CPU/MEMORY FUNCTIONS
+
+		/**
+		 * @brief Flags to indicate the capabilities of the various memory systems
+		 */
+		#define MALLOC_CAP_EXEC             (1<<0)  ///< Memory must be able to run executable code
+		#define MALLOC_CAP_32BIT            (1<<1)  ///< Memory must allow for aligned 32-bit data accesses
+		#define MALLOC_CAP_8BIT             (1<<2)  ///< Memory must allow for 8/16/...-bit data accesses
+		#define MALLOC_CAP_DMA              (1<<3)  ///< Memory must be able to accessed by DMA
+		#define MALLOC_CAP_PID2             (1<<4)  ///< Memory must be mapped to PID2 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_PID3             (1<<5)  ///< Memory must be mapped to PID3 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_PID4             (1<<6)  ///< Memory must be mapped to PID4 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_PID5             (1<<7)  ///< Memory must be mapped to PID5 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_PID6             (1<<8)  ///< Memory must be mapped to PID6 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_PID7             (1<<9)  ///< Memory must be mapped to PID7 memory space (PIDs are not currently used)
+		#define MALLOC_CAP_SPIRAM           (1<<10) ///< Memory must be in SPI RAM
+		#define MALLOC_CAP_INTERNAL         (1<<11) ///< Memory must be internal; specifically it should not disappear when flash/spiram cache is switched off
+		#define MALLOC_CAP_DEFAULT          (1<<12) ///< Memory can be returned in a non-capability-specific memory allocation (e.g. malloc(), calloc()) call
+		#define MALLOC_CAP_IRAM_8BIT        (1<<13) ///< Memory must be in IRAM and allow unaligned access
+		#define MALLOC_CAP_RETENTION        (1<<14)
+
+		#define MALLOC_CAP_INVALID          (1<<31) ///< Memory can't be used / list end marker
