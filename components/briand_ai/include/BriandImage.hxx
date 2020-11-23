@@ -17,4 +17,12 @@
 #pragma once
 
 #ifndef BRIAND_IMAGE_H
-#define BR
+#define BRIAND_IMAGE_H
+
+#include "BriandInclude.hxx"
+
+namespace Briand {
+    
+}
+
+#endif
