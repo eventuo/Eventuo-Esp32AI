@@ -11,4 +11,10 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along wit
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#pragma once
+
+#ifndef BRIAND_IMAGE_H
+#define BR
