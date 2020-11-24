@@ -218,3 +218,131 @@
 		#define MALLOC_CAP_RETENTION        (1<<14)
 
 		#define MALLOC_CAP_INVALID          (1<<31) ///< Memory can't be used / list end marker
+
+		typedef struct multi_heap_info {
+			unsigned long total_free_bytes;
+			unsigned long total_allocated_bytes;
+		} multi_heap_info_t;
+
+		typedef struct rtc_cpu_freq_config {
+			unsigned long freq_mhz;
+		} rtc_cpu_freq_config_t;
+
+		void heap_caps_get_info(multi_heap_info_t* info, uint32_t caps);
+
+		void rtc_clk_cpu_freq_get_config(rtc_cpu_freq_config_t* info);
+		void rtc_clk_cpu_freq_mhz_to_config(uint32_t mhz, rtc_cpu_freq_config_t* out);
+		void rtc_clk_cpu_freq_set_config(rtc_cpu_freq_config_t* info);
+
+		#define esp_get_free_heap_size() 320000
+		size_t heap_caps_get_largest_free_block(uint32_t caps);
+
+
+
+        //
+		// WIFI AND NETWORKING OMITTED!
+        //
+
+
+
+		// TASKS AND TIME
+
+		/** Class to handle the Thread Pool */
+		class BriandIDFPortingTaskHandle {
+			public:
+			bool toBeKilled;
+			std::thread::native_handle_type handle;
+			std::thread::id thread_id;
+			string name;
+
+			BriandIDFPortingTaskHandle(const std::thread::native_handle_type& h, const char* name, const std::thread::id& tid);
+			~BriandIDFPortingTaskHandle();
+		};
+
+		#define portTICK_PERIOD_MS 1
+
+		typedef uint64_t TickType_t;
+		typedef int BaseType_t;
+		typedef uint16_t UBaseType_t;
+		typedef void (*TaskFunction_t)( void * );
+
+		/** Task states returned by eTaskGetState. */
+		typedef enum
+		{
+			eRunning = 0,	/* A task is querying the state of itself, so must be running. */
+			eReady,			/* The task being queried is in a read or pending ready list. */
+			eBlocked,		/* The task being queried is in the Blocked state. */
+			eSuspended,		/* The task being queried is in the Suspended state, or is in the Blocked state with an infinite time out. */
+			eDeleted,		/* The task being queried has been deleted, but its TCB has not yet been freed. */
+			eInvalid		/* Used as an 'invalid state' value. */
+		} eTaskState;
+
+		typedef unsigned char StackType_t;
+		#define configSTACK_DEPTH_TYPE uint16_t
+		typedef BriandIDFPortingTaskHandle* TaskHandle_t;
+
+		/*
+		*  Used with the uxTaskGetSystemState() function to return the state of each task in the system.
+		*/
+		typedef struct xTASK_STATUS
+		{
+			TaskHandle_t xHandle;			/* The handle of the task to which the rest of the information in the structure relates. */
+			const char *pcTaskName;			/* A pointer to the task's name.  This value will be invalid if the task was deleted since the structure was populated! */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+			UBaseType_t xTaskNumber;		/* A number unique to the task. */
+			eTaskState eCurrentState;		/* The state in which the task existed when the structure was populated. */
+			UBaseType_t uxCurrentPriority;	/* The priority at which the task was running (may be inherited) when the structure was populated. */
+			UBaseType_t uxBasePriority;		/* The priority to which the task will return if the task's current priority has been inherited to avoid unbounded priority inversion when obtaining a mutex.  Only valid if configUSE_MUTEXES is defined as 1 in FreeRTOSConfig.h. */
+			uint32_t ulRunTimeCounter;		/* The total run time allocated to the task so far, as defined by the run time stats clock.  See http://www.freertos.org/rtos-run-time-stats.html.  Only valid when configGENERATE_RUN_TIME_STATS is defined as 1 in FreeRTOSConfig.h. */
+			StackType_t *pxStackBase;		/* Points to the lowest address of the task's stack area. */
+			configSTACK_DEPTH_TYPE usStackHighWaterMark;	/* The minimum amount of stack space that has remained for the task since the task was created.  The closer this value is to zero the closer the task has come to overflowing its stack. */
+		#if configTASKLIST_INCLUDE_COREID
+			BaseType_t xCoreID;				/*!< Core this task is pinned to (0, 1, or -1 for tskNO_AFFINITY). This field is present if CONFIG_FREERTOS_VTASKLIST_INCLUDE_COREID is set. */
+		#endif
+		} TaskStatus_t;
+		
+		extern unique_ptr<vector<TaskHandle_t>> BRIAND_TASK_POOL;
+
+		void vTaskDelay(TickType_t delay);
+
+		uint64_t esp_timer_get_time();
+
+		BaseType_t xTaskCreate(
+				TaskFunction_t pvTaskCode,
+				const char * const pcName,
+				const uint32_t usStackDepth,
+				void * const pvParameters,
+				UBaseType_t uxPriority,
+				TaskHandle_t * const pvCreatedTask);
+
+		void vTaskDelete(TaskHandle_t handle);
+
+		UBaseType_t uxTaskGetNumberOfTasks();
+		UBaseType_t uxTaskGetSystemState( TaskStatus_t * const pxTaskStatusArray, const UBaseType_t uxArraySize, uint32_t * const pulTotalRunTime );
+
+
+		// ESP PTHREADS
+
+		/** pthread configuration structure that influences pthread creation */
+		typedef struct {
+			size_t stack_size;  ///< The stack size of the pthread
+			size_t prio;        ///< The thread's priority
+			bool inherit_cfg;   ///< Inherit this configuration further
+			const char* thread_name;  ///< The thread name.
+			int pin_to_core;    ///< The core id to pin the thread to. Has the same value range as xCoreId argument of xTaskCreatePinnedToCore.
+		} esp_pthread_cfg_t;
+
+		esp_pthread_cfg_t esp_pthread_get_default_config(void);
+		esp_err_t esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg);
+		esp_err_t esp_pthread_get_cfg(esp_pthread_cfg_t *p);
+		esp_err_t esp_pthread_init(void);
+		
+
+		// MISC
+
+		esp_err_t nvs_flash_init(void);
+		esp_err_t nvs_flash_erase(void);
+		unsigned int esp_random();
+
+    #endif
+
+#endif
