@@ -11,4 +11,14 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/lice
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#pragma once
+
+#ifndef BRIAND_MATH_H
+#define BRIAND_MATH_H
+
+#include "BriandInclude.hxx"
+
+using namespace std
