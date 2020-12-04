@@ -32,4 +32,7 @@ namespace Briand {
         public:
 
         /** @brief Identity f(x) = x */
-    
+        static constexpr double Identity(const double& x) { return x; }
+        
+        /** @brief Identity derivative f'(x) = 1 */
+        stat
