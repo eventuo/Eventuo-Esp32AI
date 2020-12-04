@@ -35,4 +35,7 @@ namespace Briand {
         static constexpr double Identity(const double& x) { return x; }
         
         /** @brief Identity derivative f'(x) = 1 */
-        stat
+        static constexpr double DeIdentity(const double& x) { return 1; }
+
+        /** @brief ReLU function */
+        static constexpr double ReLU(c
