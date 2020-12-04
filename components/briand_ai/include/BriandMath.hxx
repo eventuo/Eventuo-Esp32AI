@@ -26,4 +26,10 @@ using namespace std;
 namespace Briand {
 
     /** @brief class with math functions used in all the project. 
-        If a more performing way of calculus is found then yo
+        If a more performing way of calculus is found then you need only to change the implementation here!
+    */
+    class Math {
+        public:
+
+        /** @brief Identity f(x) = x */
+    
