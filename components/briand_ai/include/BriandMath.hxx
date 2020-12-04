@@ -21,4 +21,9 @@
 
 #include "BriandInclude.hxx"
 
-using namespace std
+using namespace std;
+
+namespace Briand {
+
+    /** @brief class with math functions used in all the project. 
+        If a more performing way of calculus is found then yo
