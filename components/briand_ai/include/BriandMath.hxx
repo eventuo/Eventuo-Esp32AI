@@ -41,4 +41,7 @@ namespace Briand {
         static constexpr double ReLU(const double& x) { return x > 0 ? x : 0; }
 
         /** @brief ReLU derivative */
-        static constexpr double DeReLU(const double& x) { 
+        static constexpr double DeReLU(const double& x) { return x > 0 ? 1 : 0; }
+
+        /** @brief Sigmoid function */
+        static constexpr double Sigmoid(const double& x) { return 1
