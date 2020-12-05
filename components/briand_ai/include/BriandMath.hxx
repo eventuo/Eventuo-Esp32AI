@@ -47,4 +47,7 @@ namespace Briand {
         static constexpr double Sigmoid(const double& x) { return 1 / (1 + exp(-1 * x)); }
 
         /** @brief Sigmoid derivative */
-        static constexpr double DeSigmoid(const doubl
+        static constexpr double DeSigmoid(const double& x) { return Sigmoid(x)*(1 - Sigmoid(x)); }
+
+        /** @brief Weighted sum function */
+        static double WeightedSum(const vector
