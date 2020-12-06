@@ -55,4 +55,5 @@ namespace Briand {
         /** @brief Random number between 0 and 1 */
         static double Random();
 
-        /** @brief
+        /** @brief Mean squared error */
+        static constexpr double MSE(const double& target, const double& output) { return 0.5 * (target - o
