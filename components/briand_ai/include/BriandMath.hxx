@@ -59,4 +59,7 @@ namespace Briand {
         static constexpr double MSE(const double& target, const double& output) { return 0.5 * (target - output) * (target - output); }
         
         /** @brief Mean squared error derivative */
-        static constexpr double DeMSE(const
+        static constexpr double DeMSE(const double& target, const double& output) { return (output - target); }
+    };
+
+    /// @brief Typedef (alias with C++ using) an activation function as a function re
