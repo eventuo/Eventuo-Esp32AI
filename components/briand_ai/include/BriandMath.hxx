@@ -50,4 +50,9 @@ namespace Briand {
         static constexpr double DeSigmoid(const double& x) { return Sigmoid(x)*(1 - Sigmoid(x)); }
 
         /** @brief Weighted sum function */
-        static double WeightedSum(const vector
+        static double WeightedSum(const vector<double>& values, const vector<double>& weights);
+
+        /** @brief Random number between 0 and 1 */
+        static double Random();
+
+        /** @brief
