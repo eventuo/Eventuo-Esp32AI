@@ -62,4 +62,7 @@ namespace Briand {
         static constexpr double DeMSE(const double& target, const double& output) { return (output - target); }
     };
 
-    /// @brief Typedef (alias with C++ using) an activation function as a function re
+    /// @brief Typedef (alias with C++ using) an activation function as a function returning a double and asking a const double& as parameter
+    using ActivationFunction =  double (*)(const double&);
+
+    /// @brief Typedef 
