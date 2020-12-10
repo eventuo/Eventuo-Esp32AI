@@ -65,4 +65,7 @@ namespace Briand {
     /// @brief Typedef (alias with C++ using) an activation function as a function returning a double and asking a const double& as parameter
     using ActivationFunction =  double (*)(const double&);
 
-    /// @brief Typedef (alias with C++ using) an error calculation function as a function returning a double and asking two const double& as param
+    /// @brief Typedef (alias with C++ using) an error calculation function as a function returning a double and asking two const double& as parameters (TARGET and OUTPUT)
+    using ErrorFunction =  double (*)(const double&, const double&);
+
+    /** @brief The NN layer type (input, hidd
