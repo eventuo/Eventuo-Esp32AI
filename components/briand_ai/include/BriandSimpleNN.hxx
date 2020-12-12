@@ -35,3 +35,127 @@ namespace Briand::SimpleNN {
     // by taking input with
 
     /** @brief A neuron */
+    class Neuron {
+        public:
+
+        /** @brief This neuron receives input from other neurons through Synapsis. 
+         * If this is an input or bias neuron, then there is no connection.
+         */
+        unique_ptr<vector<unique_ptr<Synapsis>>> Inputs;
+
+        /** @brief The output value of this neuron. 
+         * If this is an input neuron, then this value is the input value.
+         * Otherwise this is the calculated value (activated weighted sum of connected inputs)
+        */
+        double Value;
+
+        /// @brief Neuron ID (not required)
+        long Id;
+
+        /// @brief Default constructor
+        Neuron();
+        
+        /// @brief Constructor with initial value
+        /// @param value Assigned initial value
+        Neuron(const double& value);
+
+        /// @brief Connect this neuron to other with given weight (other neuron will have one more input Synapsis)
+        /// @param other The other neuron
+        /// @param weight Synapsis weight. Default is 1.0
+        void ConnectTo(const unique_ptr<Neuron>& other, double weight = 1.0);
+
+        /// @brief Update the value, recalculating weighted sum from inputs with the given activation function.
+        /// @param activationFunction Pointer to activation function to be called for calculations
+        void UpdateValue(ActivationFunction);
+    };
+
+    /** @brief A weighted connection between two neurons */
+    class Synapsis {
+        public:
+
+        /** @brief Source neuron pointer */
+        Neuron* Source;
+
+        /** @brief Connection weight. If this is an input, Weight must be always 1. */
+        double Weight;
+    };
+
+    /** @brief A layer of neurons */
+    class NeuralLayer {
+        protected:
+
+        /// @brief Pointer to activation function for this layer
+        ActivationFunction _activationFunction;
+
+        public:
+
+        /// @brief Layer type (input, hidden, ...)
+        LayerType Type;
+
+        /// @brief Layer neurons
+        unique_ptr<vector<unique_ptr<Neuron>>> Neurons;
+
+        /// @brief Constructor with just LayerType. All must be done manually, no neurons.
+        /// @param type Required, layer type
+        /// @param activationFunction Required, activation function for the layer
+        NeuralLayer(const LayerType& type, ActivationFunction);
+
+        /// @brief Updates all layer's neurons values
+        void UpdateNeurons();
+    }; 
+
+    /// @brief An empty Neural Network, without layers, neurons and connections.
+    /// Has no particular methods, just basic data structure and propagation forward.
+    /// Use it when you know what you are doing!
+    class NeuralNetwork {
+        protected:
+
+        public:
+
+        /// @brief There is always an input
+        unique_ptr<NeuralLayer> InputLayer;
+
+        /// @brief There might be some hidden layers
+        unique_ptr<vector<unique_ptr<NeuralLayer>>> HiddenLayers;
+
+        /// @brief There is always an output layer
+        unique_ptr<NeuralLayer> OutputLayer;
+
+        /// @brief Forward Propagation
+        virtual void PropagateForward();
+
+        /// @brief Constructor
+        NeuralNetwork();
+    };
+
+    /// @brief Perceptron (one input layer, one output layer with single out, no hidden layers)
+    class Perceptron : public NeuralNetwork {
+        protected:
+
+        public:
+
+        /// @brief Create Perceptron with specified inputs. All inputs will be connected to output automatically.
+        /// @param inputs Number of input neurons
+        /// @param activationFunction Activation function to be used (pointer)
+        Perceptron(const int& inputs, ActivationFunction activationFunction);
+
+        virtual void PropagateForward() override;
+
+        /// @brief Propagate backward
+        /// @param error The error obtained, to be minimized
+        virtual void PropagateBackward(const double& error);
+
+        /// @brief Do a training session (forward and backward then backward)
+        /// @param inputValues Input values
+        /// @param target Expected output
+        /// @param errorFunction Math function f(target, output) to use in order to calculate error for backpropagation
+        /// @param error Save error (output parameter)
+        virtual void Train(const unique_ptr<vector<double>>& inputValues, const double& target, ErrorFunction errorFunction, double& error);
+
+        /// @brief Result from the single output (prediction). Method sets inputs, propagates forward and returns the value of output neuron.
+        virtual double Predict(const unique_ptr<vector<double>>& inputValues);
+    };
+
+}
+
+#endif
