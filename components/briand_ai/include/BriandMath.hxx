@@ -68,4 +68,8 @@ namespace Briand {
     /// @brief Typedef (alias with C++ using) an error calculation function as a function returning a double and asking two const double& as parameters (TARGET and OUTPUT)
     using ErrorFunction =  double (*)(const double&, const double&);
 
-    /** @brief The NN layer type (input, hidd
+    /** @brief The NN layer type (input, hidden, output ...) */
+    enum class LayerType { Input, Hidden, Output, Kernel, Pooling };
+}
+
+#endif
