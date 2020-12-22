@@ -329,3 +329,56 @@ void performance_test(){
 
     fcnn.reset();
 
+
+    printf("***********************************************************\n\n\n");    
+}
+
+/** @brief Example project 1: OR port with NN */
+void example_1() {
+
+}
+
+/** @brief Example project 2: sum two numbers */
+void example_2() {
+    
+}
+
+/** @brief Example project 3: color recognition/classifier (supervised) */
+void example_3() {
+    
+}
+
+/** @brief Example project 4: color recognition/classifier (unsupervised) */
+void example_4() {
+    
+}
+
+/** @brief Example project 5: human face detection (single) */
+void example_5() {
+    
+}
+
+/** @brief Example project 6: human face features detection (single) */
+void example_6() {
+    
+}
+
+/** @brief Example project 7: human face detection (multiple) */
+void example_7() {
+    
+}
+
+/** @brief Example project 8: human face recognition (single) */
+void example_8() {
+    
+}
+
+/** @brief Example project 9: human face recognition (multiple) */
+void example_9() {
+    
+}
+
+/** @brief Example project 10: if all working, separate project for my idea (upcoming maybe!) */
+void example_10() {
+    
+}
