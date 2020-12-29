@@ -17,4 +17,13 @@
 #include  "examples.hxx"
 
 // C++ requires extern "C"
-extern "C"
+extern "C" void app_main(void)
+{
+    /* Run examples! */
+    
+    test_porting();    
+
+    performance_test();
+
+    example_1();
+   
