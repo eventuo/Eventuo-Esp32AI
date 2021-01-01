@@ -16,4 +16,8 @@ all:
 # Build library first
 # -c option means no linking
 	
-	$(CC) -c $(LIB_SRCPATH)*.cpp -I$(LIB_INCLUDEPA
+	$(CC) -c $(LIB_SRCPATH)*.cpp -I$(LIB_INCLUDEPATH) $(CFLAGS) 
+
+# ar r makes archive of all .o objects (ru option mean substituite in existing archive if have same name)
+
+	ar r lib$(
