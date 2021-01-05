@@ -26,4 +26,6 @@ all:
 
 	ranlib lib$(LIB_OUTNAME).a
 
-# Build MAIN with option -L. (tells search this 
+# Build MAIN with option -L. (tells search this folder for libraries too) and -l briand_ai to link the produced output library.
+
+	$(CC) -o $(MAIN_OUTNAME) $(MAIN_
