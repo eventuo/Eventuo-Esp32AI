@@ -34,4 +34,4 @@ all:
 # g++ -c ../components/briand_ai/*.cpp -pthread -I../components/briand_ai/include/ -std=gnu++17 -fpermissive
 # ar r libbriand_ai.a *.o
 # ranlib libbriand_ai.a
-# g++ -o
+# g++ -o main ../main/main.cpp -I../components/briand_ai/include/ -std=gnu++17 -fpermissive -l briand_ai -L.
