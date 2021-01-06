@@ -31,4 +31,7 @@ all:
 	$(CC) -o $(MAIN_OUTNAME) $(MAIN_SRCPATH)*.cpp $(CFLAGS) -I$(MAIN_INCLUDEPATH) -L. -l$(LIB_OUTNAME)
 
 # Command line samples
-# g++ -c ../components/briand_ai/*.cpp -pthread
+# g++ -c ../components/briand_ai/*.cpp -pthread -I../components/briand_ai/include/ -std=gnu++17 -fpermissive
+# ar r libbriand_ai.a *.o
+# ranlib libbriand_ai.a
+# g++ -o
