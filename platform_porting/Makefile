@@ -28,4 +28,7 @@ all:
 
 # Build MAIN with option -L. (tells search this folder for libraries too) and -l briand_ai to link the produced output library.
 
-	$(CC) -o $(MAIN_OUTNAME) $(MAIN_
+	$(CC) -o $(MAIN_OUTNAME) $(MAIN_SRCPATH)*.cpp $(CFLAGS) -I$(MAIN_INCLUDEPATH) -L. -l$(LIB_OUTNAME)
+
+# Command line samples
+# g++ -c ../components/briand_ai/*.cpp -pthread
