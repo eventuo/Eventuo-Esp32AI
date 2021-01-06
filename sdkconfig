@@ -1,2 +1,5 @@
 #
-# Automatically generated
+# Automatically generated file. DO NOT EDIT.
+# Espressif IoT Development Framework (ESP-IDF) 5.1.0 Project Configuration
+#
+CONFIG_SOC_MPU_MIN_REGION_SIZ
