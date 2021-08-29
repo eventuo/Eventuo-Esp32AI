@@ -492,4 +492,9 @@ CONFIG_COMPILER_STACK_CHECK_MODE_NONE=y
 #
 
 #
-# Application Leve
+# Application Level Tracing
+#
+# CONFIG_APPTRACE_DEST_JTAG is not set
+CONFIG_APPTRACE_DEST_NONE=y
+# CONFIG_APPTRACE_DEST_UART1 is not set
+# CONF
