@@ -501,4 +501,14 @@ CONFIG_APPTRACE_DEST_NONE=y
 # CONFIG_APPTRACE_DEST_USB_CDC is not set
 CONFIG_APPTRACE_DEST_UART_NONE=y
 CONFIG_APPTRACE_UART_TASK_PRIO=1
-CONFIG_APPTRA
+CONFIG_APPTRACE_LOCK_ENABLE=y
+# end of Application Level Tracing
+
+#
+# Bluetooth
+#
+# CONFIG_BT_ENABLED is not set
+# end of Bluetooth
+
+#
+# Driver Configurat
