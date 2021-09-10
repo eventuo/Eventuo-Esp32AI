@@ -511,4 +511,15 @@ CONFIG_APPTRACE_LOCK_ENABLE=y
 # end of Bluetooth
 
 #
-# Driver Configurat
+# Driver Configurations
+#
+
+#
+# Legacy ADC Configuration
+#
+# CONFIG_ADC_SUPPRESS_DEPRECATE_WARN is not set
+
+#
+# Legacy ADC Calibration Configuration
+#
+# CO
