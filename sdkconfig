@@ -524,4 +524,11 @@ CONFIG_APPTRACE_LOCK_ENABLE=y
 #
 # CONFIG_ADC_CALI_SUPPRESS_DEPRECATE_WARN is not set
 # end of Legacy ADC Calibration Configuration
-# end of Legacy A
+# end of Legacy ADC Configuration
+
+#
+# SPI Configuration
+#
+# CONFIG_SPI_MASTER_IN_IRAM is not set
+CONFIG_SPI_MASTER_ISR_IN_IRAM=y
+# CONFIG_SPI_
