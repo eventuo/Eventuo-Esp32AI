@@ -550,4 +550,12 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 # end of Temperature sensor Configuration
 
 #
-# UART 
+# UART Configuration
+#
+# CONFIG_UART_ISR_IN_IRAM is not set
+# end of UART Configuration
+
+#
+# GPIO Configuration
+#
+# CONFIG_GPIO_CTRL_FUNC_IN_IRAM
