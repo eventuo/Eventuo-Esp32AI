@@ -558,4 +558,10 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 #
 # GPIO Configuration
 #
-# CONFIG_GPIO_CTRL_FUNC_IN_IRAM
+# CONFIG_GPIO_CTRL_FUNC_IN_IRAM is not set
+# end of GPIO Configuration
+
+#
+# Sigma Delta Modulator Configuration
+#
+# CONFIG_SDM_CTRL_FUNC_IN_IRAM is not set
