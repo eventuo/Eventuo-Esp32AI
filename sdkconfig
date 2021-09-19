@@ -565,3 +565,6 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 # Sigma Delta Modulator Configuration
 #
 # CONFIG_SDM_CTRL_FUNC_IN_IRAM is not set
+# CONFIG_SDM_SUPPRESS_DEPRECATE_WARN is not set
+# CONFIG_SDM_ENABLE_DEBUG_LOG is not set
+# end of Sigma Delta Modulator Configuratio
