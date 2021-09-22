@@ -567,4 +567,11 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 # CONFIG_SDM_CTRL_FUNC_IN_IRAM is not set
 # CONFIG_SDM_SUPPRESS_DEPRECATE_WARN is not set
 # CONFIG_SDM_ENABLE_DEBUG_LOG is not set
-# end of Sigma Delta Modulator Configuratio
+# end of Sigma Delta Modulator Configuration
+
+#
+# GPTimer Configuration
+#
+# CONFIG_GPTIMER_CTRL_FUNC_IN_IRAM is not set
+# CONFIG_GPTIMER_ISR_IRAM_SAFE is not set
+# CONFIG
