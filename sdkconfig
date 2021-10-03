@@ -579,4 +579,9 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 # end of GPTimer Configuration
 
 #
-# PCNT Config
+# PCNT Configuration
+#
+# CONFIG_PCNT_CTRL_FUNC_IN_IRAM is not set
+# CONFIG_PCNT_ISR_IRAM_SAFE is not set
+# CONFIG_PCNT_SUPPRESS_DEPRECATE_WARN is not set
+# CONFIG_PCNT
