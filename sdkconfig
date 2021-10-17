@@ -621,4 +621,12 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 #
 # eFuse Bit Manager
 #
-# CONFIG_E
+# CONFIG_EFUSE_CUSTOM_TABLE is not set
+# CONFIG_EFUSE_VIRTUAL is not set
+CONFIG_EFUSE_MAX_BLK_LEN=256
+# end of eFuse Bit Manager
+
+#
+# ESP-TLS
+#
+CONFIG_ESP_T
