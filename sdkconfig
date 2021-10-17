@@ -613,4 +613,12 @@ CONFIG_TWAI_ERRATA_FIX_LISTEN_ONLY_DOM=y
 # end of I2S Configuration
 
 #
-# U
+# USB Serial/JTAG Configuration
+#
+# end of USB Serial/JTAG Configuration
+# end of Driver Configurations
+
+#
+# eFuse Bit Manager
+#
+# CONFIG_E
