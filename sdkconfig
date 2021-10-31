@@ -649,4 +649,16 @@ CONFIG_ESP_TLS_USE_DS_PERIPHERAL=y
 # Wireless Coexistence
 #
 # CONFIG_ESP_COEX_EXTERNAL_COEXIST_ENABLE is not set
-# end of Wireless Coexist
+# end of Wireless Coexistence
+
+#
+# Common ESP-related
+#
+CONFIG_ESP_ERR_TO_NAME_LOOKUP=y
+# end of Common ESP-related
+
+#
+# Ethernet
+#
+CONFIG_ETH_ENABLED=y
+CONFIG_ETH_U
