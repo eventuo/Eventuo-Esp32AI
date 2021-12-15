@@ -779,4 +779,13 @@ CONFIG_PERIPH_CTRL_FUNC_IN_IRAM=y
 # GDMA Configuration
 #
 # CONFIG_GDMA_CTRL_FUNC_IN_IRAM is not set
-# CONFIG_GDMA_ISR_IRAM_SAFE i
+# CONFIG_GDMA_ISR_IRAM_SAFE is not set
+# end of GDMA Configuration
+
+#
+# Main XTAL Config
+#
+CONFIG_XTAL_FREQ_40=y
+CONFIG_XTAL_FREQ=40
+# end of Main XTAL Config
+# end of Hardware Settings
