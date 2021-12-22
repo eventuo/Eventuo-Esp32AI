@@ -789,3 +789,14 @@ CONFIG_XTAL_FREQ_40=y
 CONFIG_XTAL_FREQ=40
 # end of Main XTAL Config
 # end of Hardware Settings
+
+#
+# LCD and Touch Panel
+#
+
+#
+# LCD Touch Drivers are maintained in the IDF Component Registry
+#
+
+#
+# LCD Periphera
