@@ -924,4 +924,11 @@ CONFIG_ESP32S3_DATA_CACHE_LINE_SIZE=32
 #
 # Memory
 #
-# CON
+# CONFIG_ESP32S3_RTCDATA_IN_FAST_MEM is not set
+# CONFIG_ESP32S3_USE_FIXED_STATIC_RAM_SIZE is not set
+# end of Memory
+
+#
+# Trace memory
+#
+# 
