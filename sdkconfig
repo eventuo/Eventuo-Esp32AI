@@ -1548,4 +1548,16 @@ CONFIG_NEWLIB_TIME_SYSCALL_USE_RTC_HRT=y
 #
 # NVS
 #
-# CONFIG_NVS_ASSERT_ERROR_CHE
+# CONFIG_NVS_ASSERT_ERROR_CHECK is not set
+# end of NVS
+
+#
+# OpenThread
+#
+# CONFIG_OPENTHREAD_ENABLED is not set
+# end of OpenThread
+
+#
+# Protocomm
+#
+CONFIG_ESP_PROT
