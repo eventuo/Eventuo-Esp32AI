@@ -1667,4 +1667,16 @@ CONFIG_SPIFFS_USE_MTIME=y
 # CONFIG_SPIFFS_CACHE_DBG is not set
 # CONFIG_SPIFFS_CHECK_DBG is not set
 # CONFIG_SPIFFS_TEST_VISUALISATION is not set
-# end of Debug C
+# end of Debug Configuration
+# end of SPIFFS Configuration
+
+#
+# TCP Transport
+#
+
+#
+# Websocket
+#
+CONFIG_WS_TRANSPORT=y
+CONFIG_WS_BUFFER_SIZE=1024
+# CONF
