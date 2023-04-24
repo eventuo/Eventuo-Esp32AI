@@ -1679,4 +1679,11 @@ CONFIG_SPIFFS_USE_MTIME=y
 #
 CONFIG_WS_TRANSPORT=y
 CONFIG_WS_BUFFER_SIZE=1024
-# CONF
+# CONFIG_WS_DYNAMIC_BUFFER is not set
+# end of Websocket
+# end of TCP Transport
+
+#
+# Ultra Low Power (ULP) Co-processor
+#
+# CONFIG_ULP_COPROC_ENABLED
