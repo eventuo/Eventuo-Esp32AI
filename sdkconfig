@@ -1686,4 +1686,10 @@ CONFIG_WS_BUFFER_SIZE=1024
 #
 # Ultra Low Power (ULP) Co-processor
 #
-# CONFIG_ULP_COPROC_ENABLED
+# CONFIG_ULP_COPROC_ENABLED is not set
+# end of Ultra Low Power (ULP) Co-processor
+
+#
+# Unity unit testing library
+#
+CONFIG_UNITY_ENABLE_F
