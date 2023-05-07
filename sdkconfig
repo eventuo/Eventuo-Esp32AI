@@ -1732,4 +1732,9 @@ CONFIG_VFS_SUPPORT_TERMIOS=y
 #
 # Host File System I/O (Semihosting)
 #
-CON
+CONFIG_VFS_SEMIHOSTFS_MAX_MOUNT_POINTS=1
+# end of Host File System I/O (Semihosting)
+# end of Virtual file system
+
+#
+# Wear Levelli
